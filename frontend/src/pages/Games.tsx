@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Nav from "../components/Nav";
 
-import steam from "../assets/images/steam.PNG"
+import steam from "../assets/images/steam.png"
 
 // Styling/CSS
 import styled from "styled-components";
