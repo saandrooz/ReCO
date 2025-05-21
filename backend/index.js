@@ -25,21 +25,35 @@ const client = new pg_1.Client({
     connectionString: process.env.PGURI,
 });
 client.connect();
-app.get('/api/Games', (_request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const { rows } = yield client.query('SELECT * FROM games');
+// Get All Games
+app.get("/reco/Games", (_request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rows } = yield client.query("SELECT * FROM games");
     response.send(rows);
 }));
-app.get('/api/Games/:id', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const { rows } = yield client.query('SELECT * FROM games WHERE id = $1', [request.params.id]);
+// Get Specific Game Details 
+app.get("/reco/Games/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rows } = yield client.query("SELECT * FROM games WHERE id = $1", [
+        request.params.id,
+    ]);
     response.send(rows);
-    // const { rows: games } = await client.query('SELECT * FROM games');
-    // const { rows: reviews } = await client.query('SELECT * FROM reviews');
-    // response.send({
-    //   games,    
-    //   reviews,  
-    // });
 }));
-app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), 'dist')));
+// Get Game Genres
+app.get("/reco/Genres/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const gameID = request.params.id;
+    const { rows } = yield client.query("SELECT * FROM game_genres WHERE game_id = $1", [
+        gameID
+    ]);
+    response.send(rows);
+}));
+// Create/Post Account/User
+app.post("/reco/Register", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = request.body.username;
+    const email = request.body.email;
+    const password = request.body.password;
+    const { rows } = yield client.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)", [username, email, password]);
+    response.send(rows);
+}));
+app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "dist")));
 app.listen(3000, () => {
-    console.log('The web service, ReCo, can now receive requests.');
+    console.log("The web service, ReCo, can now receive requests.");
 });

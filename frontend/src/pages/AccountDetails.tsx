@@ -1,6 +1,12 @@
 import Nav from "../components/Nav";
 
 function AccountDetails() {
+
+  // function getReviews() {
+
+  // }
+
+
   return (
     <>
     <Nav />

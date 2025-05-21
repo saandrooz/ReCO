@@ -2,30 +2,46 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+// Imports Nav Component
 import Nav from "../components/Nav";
 
+// Imports Images
+import steam from "../assets/images/steam-logo.png";
+import check from "../assets/images/check-steam.png";
 
 // Styling/CSS
 import styled from "styled-components";
 
-const IMG = styled.img`
-  width: 80%;
+const VIDEO = styled.video`
+  width: 90%;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-width: 600px;
 `;
 
-const DIV1 = styled.div`
-  background-color: #2F2139;
-  border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-width: 1000px;
-  margin: auto;
-  padding: 0 15px 15px 15px;
+const STEAM = styled.img`
+  height: 50px;
+  width: auto;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+    animation: rotate 10s linear infinite;
+    transform-origin: center;
+  }
+`;
+const TEXT_IMG = styled.img`
+  height: 50px;
+  width: auto;
+  margin-right: 15px;
+`;
+
+const GENRE = styled.p`
+  display: inline-block;
+  padding: 1px 10px;
+  margin: 10px;
+  background-color: #d19efa;
+  color: #2a1e33;
 `;
 
 // End of Styling/CSS
-
 
 interface Game {
   id: number;
@@ -37,46 +53,77 @@ interface Game {
   steam_link: string;
 }
 
+interface Genre {
+  id: number;
+  game_id: number;
+  genre_id: number;
+}
+
 function GameDetails() {
   const { id } = useParams();
   const [gameDetails, setGameDetails] = useState([]);
+  const [gameGenres, setGameGenres] = useState([]);
+
+  // function getReviews() {
+
+  // }
 
   useEffect(() => {
     if (id) {
-      fetch("/api/Games/" + id)
+      fetch("/reco/Games/" + id)
         .then((response) => response.json())
         .then((data) => setGameDetails(data));
     }
   }, [id]);
 
+  useEffect(() => {
+    if (id) {
+      fetch("/reco/Genres/" + id)
+        .then((response) => response.json())
+        .then((data) => setGameGenres(data));
+    }
+  }, [id]);
+
   return (
     <>
-    <Nav />
-      {gameDetails && (
+      <Nav />
+      <div>
+        {gameDetails && (
           <div>
             {gameDetails.map((game: Game) => (
-              <DIV1 key={game.id}>
-                <h2> {game.title} </h2>
-                <IMG alt="Image from the game." src={game.image} />
-                <p>
-                  The game "{game.title}" was developed by {game.developer}.
-                  Read more about it on steam: {game.steam_link}.{" "}
-                </p>
-                <button>
-                  <Link to={"/Games/" + game.id}>Show More</Link>
-                </button>
+              <div className="DIV1" key={game.id}>
+                <h1> {game.title} </h1>
+                <VIDEO width="320" height="240" controls muted>
+                  <source src={game.trailer} type="video/mp4" />
+                </VIDEO>
                 <div>
+                  {gameGenres.map((genre: Genre) => (
+                    <GENRE key={genre.id}>{genre.genre_id}</GENRE>
+                  ))}
+                </div>
+                <div>
+                  <p> {game.description} </p>
                   <p>
                     {" "}
-                    {game.description} {game.title}{" "}
+                    {game.title} is developed by {game.developer}.
                   </p>
                 </div>
-              </DIV1>
+                <div>
+                  <TEXT_IMG alt="Check it out on Steam." src={check} />
+                  <a href={game.steam_link} target="_blank">
+                    <STEAM alt="Steam Icon." src={steam} />
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         )}
+      </div>
+      <button>
+        <Link to={"/Games"}>Browse more games</Link>
+      </button>
     </>
-  )
+  );
 }
 
 export default GameDetails;

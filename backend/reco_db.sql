@@ -9,6 +9,7 @@ CREATE TABLE games (
 	steam_link TEXT NOT NULL
 );
 
+-- Har lagt in --
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	username TEXT UNIQUE NOT NULL, 
@@ -17,9 +18,9 @@ CREATE TABLE users (
 	created DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
+-- Har lagt in --
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
-	user_username 
 	game_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 10),
@@ -31,11 +32,13 @@ CREATE TABLE reviews (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- Har lagt in --
 CREATE TABLE genres (
 	id SERIAL PRIMARY KEY,
 	name TEXT NOT NULL
 );
 
+-- Har lagt in --
 CREATE TABLE game_genres (
   id SERIAL PRIMARY KEY,
 	game_id INTEGER NOT NULL,
@@ -113,5 +116,40 @@ INSERT INTO games (
 		'https://store.steampowered.com/app/322330/Dont_Starve_Together/'
 		);
 
+-- Tom INSERT för genres för att kopiera och fylla med genrer --
+INSERT INTO genres (name) VALUES ('');
 
+-- Har lagt in --
+INSERT INTO genres (name) VALUES ('Horror');
+INSERT INTO genres (name) VALUES ('Sci-fi');
+INSERT INTO genres (name) VALUES ('Comedy');
+INSERT INTO genres (name) VALUES ('Adventure');
+INSERT INTO genres (name) VALUES ('Sandbox');
+INSERT INTO genres (name) VALUES ('Survival');
+INSERT INTO genres (name) VALUES ('Crafting');
 
+-- Tom INSERT för game_genres för att kopiera och fylla spel med genrer --
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (, );
+
+-- Har lagt in --
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (1, 1);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (1, 2);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (1, 3);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (2, 1);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (2, 2);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (2, 3);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (3, 4);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (3, 5);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (3, 6);
+INSERT INTO game_genres (game_id, genre_id)
+VALUES (3, 7);

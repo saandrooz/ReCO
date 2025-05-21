@@ -1,6 +1,6 @@
 // Import Pages
 import LogIn from "./pages/LogIn";
-import CreateAccount from "./pages/CreateAccount";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
@@ -17,11 +17,11 @@ function App() {
     {
       children: [
         { element: <LogIn />, path: "/" },
-        { element: <CreateAccount />, path: "/CreateAccount" },
+        { element: <Register />, path: "/Register" },
         { element: <Home />, path: "/Home" },
         { element: <Games />, path: "/Games" },
         { element: <GameDetails />, path: "/Games/:id" },
-        { element: <AccountDetails />, path: "/Account/:id" },
+        { element: <AccountDetails />, path: "/Account" },
       ],
       element: (
         <>

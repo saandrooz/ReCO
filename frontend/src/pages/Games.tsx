@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Imports Nav Component 
 import Nav from "../components/Nav";
 
+// Imports Images
 import steam from "../assets/images/steam-logo.png"
 
 // Styling/CSS
@@ -13,17 +15,6 @@ const IMG = styled.img`
   height: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 500px;
-`;
-
-const DIV1 = styled.div`
-  background-color: #2F2139;
-  border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 5px;
-  padding-bottom: 20px;
-  position: relative;
 `;
 
 const IMG_DIV = styled.div`
@@ -46,7 +37,7 @@ function Games() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetch("/api/Games")
+    fetch("/reco/Games")
       .then((response) => response.json())
       .then((data) => setGames(data));
   }, []);
@@ -54,12 +45,15 @@ function Games() {
   return (
     <>
       <Nav />
-      <div>games</div>
+      <div>
+        <h1>Browse our collection of games!</h1>
+        <p>Below is a collection of Co-Op and Multiplayer games</p>
+      </div>
       <div>
         {games && (
           <div>
             {games.map((game: Game) => (
-              <DIV1 key={game.id}>
+              <div className="DIV1" key={game.id}>
                 <h2> {game.title} </h2>
                 <IMG_DIV>
                 <IMG alt="Image from the game." src={game.image} />
@@ -68,7 +62,7 @@ function Games() {
                 <button>
                   <Link to={"/Games/" + game.id}>Show More</Link>
                 </button>
-              </DIV1>
+              </div>
             ))}
           </div>
         )}

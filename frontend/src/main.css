@@ -1,14 +1,27 @@
+/* General CSS -- START */
 body {
   background-color: #503661;
-  color: #F5F5F5;
+  color: #f5f5f5;
   display: flex;
-  justify-content: center;     
-  align-items: center;                  
+  justify-content: center;
+  align-items: center;
   margin: 0;
-  padding: 20px;
   text-align: center;
 }
 
+h1 {
+  padding: 10px;
+  padding-top: 25px;
+}
+
+h2 {
+  padding: 10px;
+  padding-top: 25px;
+}
+
+
+
+/* General CSS -- END */
 
 /* Button CSS -- START */
 button {
@@ -21,7 +34,7 @@ button {
   font-size: 1em;
   font-weight: bold;
   font-family: inherit;
-  background-color: #D19EFA;
+  background-color: #d19efa;
   cursor: pointer;
   transition: filter 1s;
 }
@@ -33,15 +46,20 @@ button:hover {
 }
 
 button > a {
-  color: #2F2139;
+  color: #2a1e33;
   text-decoration: none;
 }
 
-
 @keyframes button-animation {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(3deg); }
-  100% { transform: rotate(-3deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(-3deg);
+  }
 }
 
 /* Button CSS -- END */
@@ -62,9 +80,41 @@ button > a {
   transform-origin: center;
 }
 
-@keyframes rotate{
-  from{ transform: rotate(-360deg); }
-  to{ transform: rotate(360deg); }
+@keyframes rotate {
+  from {
+    transform: rotate(-360deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* STEAM LOGO CSS -- END */
+
+/* Div CSS -- START */
+
+.DIV1 {
+  background-color: #2a1e33;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 1000px;
+  margin: 20px;
+  padding: 0 15px 25px 15px;
+  margin-bottom: 50px;
+}
+
+/* Div CSS -- END */
+
+
+/* Log In and Register CSS -- START */
+
+.INPUT {
+  margin-top: 20px; 
+}
+
+.INPUT > input {
+  width: 300px;
+  background-color: #F5F5F5;
+}
+
+/* Log In and Register CSS -- END */
