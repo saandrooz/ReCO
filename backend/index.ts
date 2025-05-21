@@ -24,7 +24,7 @@ app.get('/api/Games', async (_request: Request, response: Response) => {
 })
 
 
-app.get('/api/Games:id', async (request: Request, response: Response) => {
+app.get('/api/Games/:id', async (request: Request, response: Response) => {
   const { rows } = await client.query(
       'SELECT * FROM games WHERE id = $1',
       [request.params.id]

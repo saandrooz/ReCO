@@ -19,6 +19,7 @@ CREATE TABLE users (
 
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
+	user_username 
 	game_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 10),
