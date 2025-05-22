@@ -143,16 +143,18 @@ function GameDetails() {
           </div>
         )}
       </div>
-      <div className="container">
-        <h2>See what other think!</h2>
-        <REVIEWS>
-          {gameReviews.map((review: Review) => (
-            <div key={review.id}>
-              <p>{review.rating}</p>
-              <p>{review.review_text}</p>
-            </div>
-          ))}
-        </REVIEWS>
+      <div className="main_div">
+        <div className="container">
+          <h2>See what other think!</h2>
+          <REVIEWS>
+            {gameReviews.map((review: Review) => (
+              <div key={review.id}>
+                <p>{review.rating}</p>
+                <p>{review.review_text}</p>
+              </div>
+            ))}
+          </REVIEWS>
+        </div>
       </div>
       <button>
         <Link to={"/Games"}>Browse more games</Link>
