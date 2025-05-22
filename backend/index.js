@@ -40,7 +40,7 @@ app.get("/reco/Games/:id", (request, response) => __awaiter(void 0, void 0, void
 // Get Game Genres
 app.get("/reco/Genres/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const gameID = request.params.id;
-    const { rows } = yield client.query("SELECT * FROM game_genres WHERE game_id = $1", [
+    const { rows } = yield client.query("SELECT * FROM game_genres INNER JOIN genres ON game_genres.genre_id = genres.id WHERE game_id = $1", [
         gameID
     ]);
     response.send(rows);
@@ -51,6 +51,40 @@ app.post("/reco/Register", (request, response) => __awaiter(void 0, void 0, void
     const email = request.body.email;
     const password = request.body.password;
     const { rows } = yield client.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)", [username, email, password]);
+    response.send(rows);
+}));
+// Log In User
+app.post("/reco/", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const email = request.body.email;
+    const password = request.body.password;
+    const { rows } = yield client.query("SELECT id, username, email, created FROM users WHERE email = $1 AND password = $2", [email, password]);
+    if (rows && rows.length > 0) {
+        response.send(rows[0]);
+    }
+    else {
+        response.status(401).send(null);
+    }
+}));
+// User Profile 
+app.get("/reco/Profile/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rows } = yield client.query("SELECT * FROM users WHERE users.id = $1", [request.params.id]);
+    response.send(rows);
+}));
+// Get Reviews For Specific Game
+app.get("/reco/Reviews/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const gameID = request.params.id;
+    const { rows } = yield client.query("SELECT * FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE game_id = $1", [
+        gameID
+    ]);
+    response.send(rows);
+}));
+// Get Username Of A Published Review For A Specific Game
+// OBS: NEEDS WORK
+app.get("/reco/Reviews/:userID", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const userID = request.params.userID;
+    const { rows } = yield client.query("SELECT * FROM reviews INNER JOIN users ON reviews.user_id = users.id WHERE user_id = $1", [
+        userID
+    ]);
     response.send(rows);
 }));
 app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "dist")));

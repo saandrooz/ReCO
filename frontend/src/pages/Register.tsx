@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+// Imports Components
 // Imports Nav Component DELETE LATER, SHOULD NOT BE IN FINAL PRODUCT
 import Nav from "../components/Nav";
 
@@ -14,7 +15,8 @@ function Register() {
       <Nav />
       <h1>Create Account</h1>
       <p>Create an account to get access to ReCO!</p>
-      <div className="DIV1">
+      <div className="main_div">
+      <div className="container">
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -35,7 +37,7 @@ function Register() {
 
                 if (!response.ok) {
                   alert(
-                    "Error: Could not create account. Please fill in account details. Username and Email has to be unique"
+                    "Error: Could not create account. Please fill in account details. Username and Email has to be unique."
                   );
                 }
               })
@@ -50,7 +52,7 @@ function Register() {
           }}
         >
           <h2>Please fill in the following:</h2>
-          <div className="INPUT">
+          <div className="input">
             <label>Username: </label>
             <br />
             <input
@@ -62,7 +64,7 @@ function Register() {
               value={username}
             />
           </div>
-          <div className="INPUT">
+          <div className="input">
             <label>Email: </label>
             <br />
             <input
@@ -74,7 +76,7 @@ function Register() {
               value={email}
             />
           </div>
-          <div className="INPUT">
+          <div className="input">
             <label>Password: </label>
             <br />
             <input
@@ -89,7 +91,8 @@ function Register() {
           <button type="submit">Create Account</button>
         </form>
       </div>
-      <div>
+      </div>
+      <div className="main_div">
         <button>
           <Link to={"/"}>Click here to log in</Link>
         </button>

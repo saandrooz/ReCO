@@ -11,6 +11,8 @@ const NAV = styled.div`
 const LINK = styled(Link)`
   text-decoration: none;
   color: #d19efa;
+  padding: 5px 40px;
+  font-size: large;
 `;
 // End of Styling/CSS
 

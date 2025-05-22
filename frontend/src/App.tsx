@@ -1,3 +1,6 @@
+import {useState} from "react"
+import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+
 // Import Pages
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
@@ -6,13 +9,15 @@ import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
 import AccountDetails from "./pages/AccountDetails";
 
-// Import Components
+// Imports Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Context from "./components/Context"
 
-import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
 
 function App() {
+  const [user, setUser] = useState(0)
+
   const router = createHashRouter([
     {
       children: [
@@ -25,11 +30,13 @@ function App() {
       ],
       element: (
         <>
+        <Context.Provider value={{user, setUser}}>
           <Header />
           <main>
             <Outlet />
           </main>
           <Footer />
+          </Context.Provider>
         </>
       ),
     },

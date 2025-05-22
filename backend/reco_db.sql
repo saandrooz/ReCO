@@ -153,3 +153,6 @@ INSERT INTO game_genres (game_id, genre_id)
 VALUES (3, 6);
 INSERT INTO game_genres (game_id, genre_id)
 VALUES (3, 7);
+
+-- Exempel Review bara för att testa kod -- 
+INSERT INTO reviews (game_id, user_id, rating, review_text) VALUES (1, 1, 10, 'The Huntsman shows up in my nightmares and the Taxman is after me. I fear for my life. 10/10 would recommend.');

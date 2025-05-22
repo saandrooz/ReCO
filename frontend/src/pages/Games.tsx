@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Imports Nav Component 
+// Imports Components
 import Nav from "../components/Nav";
 
 // Imports Images
-import steam from "../assets/images/steam-logo.png"
+import steam from "../assets/images/steam-logo.png";
 
 // Styling/CSS
 import styled from "styled-components";
@@ -19,7 +19,7 @@ const IMG = styled.img`
 
 const IMG_DIV = styled.div`
   position: relative;
-`
+`;
 
 // End of Styling/CSS
 
@@ -45,28 +45,30 @@ function Games() {
   return (
     <>
       <Nav />
-      <div>
-        <h1>Browse our collection of games!</h1>
-        <p>Below is a collection of Co-Op and Multiplayer games</p>
-      </div>
-      <div>
-        {games && (
-          <div>
-            {games.map((game: Game) => (
-              <div className="DIV1" key={game.id}>
-                <h2> {game.title} </h2>
-                <IMG_DIV>
-                <IMG alt="Image from the game." src={game.image} />
-                <a href={game.steam_link} target="_blank"><img className="steam" alt="Steam Icon." src={steam} /></a>
-                </IMG_DIV>
-                <button>
-                  <Link to={"/Games/" + game.id}>Show More</Link>
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+        <div>
+          <h1>Browse our collection of games!</h1>
+          <p>Below is a collection of Co-Op and Multiplayer games</p>
+        </div>
+        <div className="main_div">
+          {games && (
+            <div>
+              {games.map((game: Game) => (
+                <div className="container" key={game.id}>
+                  <h2> {game.title} </h2>
+                  <IMG_DIV>
+                    <IMG alt="Image from the game." src={game.image} />
+                    <a href={game.steam_link} target="_blank">
+                      <img className="steam" alt="Steam Icon." src={steam} />
+                    </a>
+                  </IMG_DIV>
+                  <button>
+                    <Link to={"/Games/" + game.id}>Show More</Link>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
     </>
   );
 }

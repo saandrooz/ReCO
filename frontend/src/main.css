@@ -2,7 +2,6 @@
 body {
   background-color: #503661;
   color: #f5f5f5;
-  display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -19,7 +18,11 @@ h2 {
   padding-top: 25px;
 }
 
-
+.main_div {
+  display: flex;
+  margin: 0;
+  justify-content: center;
+}
 
 /* General CSS -- END */
 
@@ -93,7 +96,7 @@ button > a {
 
 /* Div CSS -- START */
 
-.DIV1 {
+.container {
   background-color: #2a1e33;
   border-radius: 0.5em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
@@ -108,11 +111,11 @@ button > a {
 
 /* Log In and Register CSS -- START */
 
-.INPUT {
+.input {
   margin-top: 20px; 
 }
 
-.INPUT > input {
+.input > input {
   width: 300px;
   background-color: #F5F5F5;
 }
