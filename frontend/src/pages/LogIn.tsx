@@ -4,9 +4,7 @@ import { useNavigate } from "react-router";
 import { useContext } from "react";
 
 // Imports Components
-// Imports Nav Component DELETE LATER, SHOULD NOT BE IN FINAL PRODUCT
-import Nav from "../components/Nav";
-import Context from "../components/Context";
+import Context from "../components/UserContext";
 
 // Styling/CSS
 // import styled from "styled-components";
@@ -23,7 +21,6 @@ function LogIn() {
 
   return (
     <>
-      <Nav />
       <h1>Please sign in to use ReCO</h1>
       <div className="main_div">
         <div className="container">
@@ -76,7 +73,7 @@ function LogIn() {
                 placeholder="Email"
                 type="email"
                 value={email}
-              />
+                required />
             </div>
             <div className="input">
               <label>Password: </label>
@@ -88,7 +85,7 @@ function LogIn() {
                 placeholder="Password"
                 type="password"
                 value={password}
-              />
+                required />
             </div>
             <button type="submit">LOG IN</button>
           </form>

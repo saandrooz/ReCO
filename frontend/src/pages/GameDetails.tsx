@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // Imports Components
 import Nav from "../components/Nav";
+import WriteReview from "../components/WriteReview";
 
 // Imports Images
 import steam from "../assets/images/steam-logo.png";
@@ -43,8 +45,6 @@ const GENRE = styled.p`
 `;
 
 const REVIEWS = styled.div`
-  border-bottom: solid 1px #d19efa;
-  border-top: solid 1px #d19efa;
   padding: 10px 30px;
 `;
 
@@ -73,17 +73,18 @@ interface Review {
   user_id: number;
   rating: number;
   review_text: string;
+  created: string;
+  username: string;
 }
+
 
 function GameDetails() {
   const { id } = useParams();
+  const location = useLocation();
   const [gameDetails, setGameDetails] = useState([]);
   const [gameGenres, setGameGenres] = useState([]);
   const [gameReviews, setGameReviews] = useState([]);
 
-  // function getReviews() {
-
-  // }
 
   useEffect(() => {
     if (id) {
@@ -106,7 +107,8 @@ function GameDetails() {
         .then((response) => response.json())
         .then((data) => setGameReviews(data));
     }
-  }, [id]);
+  }, [location.key, id]);
+
 
   return (
     <>
@@ -148,14 +150,17 @@ function GameDetails() {
           <h2>See what other think!</h2>
           <REVIEWS>
             {gameReviews.map((review: Review) => (
-              <div key={review.id}>
-                <p>{review.rating}</p>
+              <div className="review_div" key={review.id}>
+                <p>User: {review.username}</p>
+                <p>Rating: {review.rating}/10</p>
                 <p>{review.review_text}</p>
+                <p>{review.created}</p>
               </div>
             ))}
           </REVIEWS>
         </div>
       </div>
+      <WriteReview />
       <button>
         <Link to={"/Games"}>Browse more games</Link>
       </button>

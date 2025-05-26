@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react";
 import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
 
 // Import Pages
@@ -12,11 +12,11 @@ import AccountDetails from "./pages/AccountDetails";
 // Imports Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Context from "./components/Context"
-
+import UserContext from "./components/UserContext";
+import DetectUser from "./components/DetectUser";
 
 function App() {
-  const [user, setUser] = useState(0)
+  const [user, setUser] = useState(0);
 
   const router = createHashRouter([
     {
@@ -30,13 +30,14 @@ function App() {
       ],
       element: (
         <>
-        <Context.Provider value={{user, setUser}}>
-          <Header />
-          <main>
-            <Outlet />
-          </main>
-          <Footer />
-          </Context.Provider>
+          <UserContext.Provider value={{ user, setUser }}>
+            <DetectUser />
+            <Header />
+            <main>
+              <Outlet />
+            </main>
+            <Footer />
+          </UserContext.Provider>
         </>
       ),
     },

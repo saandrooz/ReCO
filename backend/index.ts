@@ -17,14 +17,14 @@ const client = new Client({
 
 client.connect();
 
-// Get All Games
+// Get all games
 app.get("/reco/Games", async (_request: Request, response: Response) => {
   const { rows } = await client.query("SELECT * FROM games");
 
   response.send(rows);
 });
 
-// Get Specific Game Details 
+// Get specific game details
 app.get("/reco/Games/:id", async (request: Request, response: Response) => {
   const { rows } = await client.query("SELECT * FROM games WHERE id = $1", [
     request.params.id,
@@ -33,75 +33,101 @@ app.get("/reco/Games/:id", async (request: Request, response: Response) => {
   response.send(rows);
 });
 
-// Get Game Genres
+// Get game genres
 app.get("/reco/Genres/:id", async (request: Request, response: Response) => {
-  const gameID = request.params.id
+  const gameID = request.params.id;
 
-  const { rows } = await client.query("SELECT * FROM game_genres INNER JOIN genres ON game_genres.genre_id = genres.id WHERE game_id = $1", [
-    gameID
-  ]);
+  const { rows } = await client.query(
+    "SELECT * FROM game_genres INNER JOIN genres ON game_genres.genre_id = genres.id WHERE game_id = $1",
+    [gameID]
+  );
 
   response.send(rows);
 });
 
-// Create/Post Account/User
-app.post("/reco/Register", async (request: Request, response: Response) => {
-  const username = request.body.username 
-  const email = request.body.email
-  const password = request.body.password
+// Get reviews for a specific game and get username of published review
+app.get("/reco/Reviews/:id", async (request: Request, response: Response) => {
+  const gameID = request.params.id;
 
-  const { rows } = await client.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
+  const { rows } = await client.query(
+    "SELECT reviews.id, reviews.rating, reviews.review_text, reviews.created, users.username FROM reviews INNER JOIN users ON reviews.user_id = users.id WHERE reviews.game_id = $1",
+    [gameID]
+  );
+
+  response.send(rows);
+});
+
+// Post new review for a game
+app.post(
+  "/reco/NewReview/:id",
+  async (request: Request, response: Response) => {
+    const gameID = request.params.id;
+    const userID = request.body.user_id;
+    const rating = request.body.rating;
+    const text = request.body.review_text;
+
+    const { rows } = await client.query(
+      "INSERT INTO reviews (game_id, user_id, rating, review_text) VALUES ($1, $2, $3, $4)",
+      [gameID, userID, rating, text]
+    );
+
+    response.send(rows);
+  }
+);
+
+// Create/Register account/user
+app.post("/reco/Register", async (request: Request, response: Response) => {
+  const username = request.body.username;
+  const email = request.body.email;
+  const password = request.body.password;
+
+  const { rows } = await client.query(
+    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
     [username, email, password]
   );
 
   response.send(rows);
 });
 
-
-// Log In User
+// Log in user/page
 app.post("/reco/", async (request: Request, response: Response) => {
-  const email = request.body.email
-  const password = request.body.password
+  const email = request.body.email;
+  const password = request.body.password;
 
-  const { rows } = await client.query("SELECT id, username, email, created FROM users WHERE email = $1 AND password = $2", [email, password]);
+  const { rows } = await client.query(
+    "SELECT id, username, email, created FROM users WHERE email = $1 AND password = $2",
+    [email, password]
+  );
 
   if (rows && rows.length > 0) {
     response.send(rows[0]);
   } else {
-    response.status(401).send(null)
+    response.status(401).send(null);
   }
-
 });
 
-// User Profile 
+// Get user details for profile page
 app.get("/reco/Profile/:id", async (request: Request, response: Response) => {
-  const { rows } = await client.query("SELECT * FROM users WHERE users.id = $1", [request.params.id]);
+  const { rows } = await client.query(
+    "SELECT * FROM users WHERE users.id = $1",
+    [request.params.id]
+  );
 
   response.send(rows);
 });
 
-// Get Reviews For Specific Game
-app.get("/reco/Reviews/:id", async (request: Request, response: Response) => {
-  const gameID = request.params.id
+// Get users published reviews for profile page
+app.get(
+  "/reco/UserReviews/:id",
+  async (request: Request, response: Response) => {
+    const { rows } = await client.query(
+      "SELECT reviews.id, reviews.game_id, reviews.user_id, reviews.rating, reviews.review_text, reviews.created, games.title FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE reviews.user_id = $1",
+      [request.params.id]
+    );
 
-  const { rows } = await client.query("SELECT * FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE game_id = $1", [
-    gameID
-  ]);
-
-  response.send(rows);
-});
-
-// Get Username Of A Published Review For A Specific Game
-// OBS: NEEDS WORK
-app.get("/reco/Reviews/:userID", async (request: Request, response: Response) => {
-  const userID = request.params.userID
-
-  const { rows } = await client.query("SELECT * FROM reviews INNER JOIN users ON reviews.user_id = users.id WHERE user_id = $1", [
-    userID
-  ]);
-
-  response.send(rows);
-});
+    response.send(rows);
+  }
+);
 
 app.use(express.static(path.join(path.resolve(), "dist")));
 

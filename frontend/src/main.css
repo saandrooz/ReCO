@@ -95,7 +95,6 @@ button > a {
 /* STEAM LOGO CSS -- END */
 
 /* Div CSS -- START */
-
 .container {
   background-color: #2a1e33;
   border-radius: 0.5em;
@@ -106,6 +105,11 @@ button > a {
   margin-bottom: 50px;
 }
 
+.review_div {
+  border-top: solid 1px #d19efa;
+  border-bottom: solid 1px #d19efa;
+  padding: 10px 30px;
+}
 /* Div CSS -- END */
 
 

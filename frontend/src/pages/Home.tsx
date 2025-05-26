@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 
 // Imports Components
 import Nav from "../components/Nav";
-import Context from "../components/Context";
 
 // Styling/CSS -- START
 import styled from "styled-components";
@@ -14,12 +12,10 @@ const H2 = styled.h2`
 // Styling/CSS -- END
 
 function Home() {
-  const { user } = useContext(Context);
 
   return (
     <>
       <Nav />
-      User: {user}
       <div className="main_div">
         <div className="container">
           <h1>Welcome to ReCO!</h1>

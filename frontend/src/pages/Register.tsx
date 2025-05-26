@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-// Imports Components
-// Imports Nav Component DELETE LATER, SHOULD NOT BE IN FINAL PRODUCT
-import Nav from "../components/Nav";
-
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +8,6 @@ function Register() {
 
   return (
     <>
-      <Nav />
       <h1>Create Account</h1>
       <p>Create an account to get access to ReCO!</p>
       <div className="main_div">
@@ -62,7 +57,7 @@ function Register() {
               placeholder="Username"
               type="text"
               value={username}
-            />
+              required />
           </div>
           <div className="input">
             <label>Email: </label>
@@ -74,7 +69,7 @@ function Register() {
               placeholder="Email"
               type="email"
               value={email}
-            />
+              required />
           </div>
           <div className="input">
             <label>Password: </label>
@@ -86,7 +81,7 @@ function Register() {
               placeholder="Password"
               type="password"
               value={password}
-            />
+              required />
           </div>
           <button type="submit">Create Account</button>
         </form>
