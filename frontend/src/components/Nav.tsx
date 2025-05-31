@@ -18,6 +18,11 @@ const IMG = styled.img`
   height: 25px;
   width: auto;
 
+  @media (min-width: 350px) {
+    height: 30px;
+    width: auto;
+  }
+
   &:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
     animation: icon-animation 0.6s ease-in-out alternate infinite;
