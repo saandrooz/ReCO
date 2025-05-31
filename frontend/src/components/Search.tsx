@@ -17,6 +17,7 @@ const DIV = styled.div`
 
 const P = styled.p`
   color: #d19efa;
+  flex-basis: 100%;
 `;
 
 const IMG = styled.img`
@@ -35,14 +36,15 @@ const BOX = styled.div`
   border-radius: 0.5em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 300px;
-  margin: 5px;
-  padding: 0 15px 25px 15px;
-  margin-bottom: 50px;
+  padding: 0 5px 25px 5px;
+  margin: 25px 20px;
 `;
 
 const H2 = styled.h2`
   font-size: 25px;
+  padding: 0;
 `;
+
 
 // End of Styling/CSS
 
@@ -112,9 +114,7 @@ function Search() {
           ) : searchedGame.length > 0 ? (
             <div>
               <DIV>
-                <div>
                   <P>Was this what you searched for? C: </P>
-                </div>
                 {searchedGame.map((game: Game) => (
                   <BOX key={game.id}>
                     <H2> {game.title} </H2>
@@ -126,11 +126,9 @@ function Search() {
                     </button>
                   </BOX>
                 ))}
-                  <div>
                   <P>
                     Couldn't find what you where looking for? Browse the games that we do have below!
                   </P>
-                </div>
               </DIV>
             </div>
           ) : (

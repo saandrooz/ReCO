@@ -56,17 +56,6 @@ strong {
 }
 /* General CSS -- END */
 
-/* Nav CSS -- START */
-@keyframes icon-animation {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  } 
-}
-/* Nav CSS -- END */
-
 /* Button CSS -- START */
 button {
   margin: 20px auto 0;

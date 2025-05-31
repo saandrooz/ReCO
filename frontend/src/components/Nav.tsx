@@ -23,6 +23,15 @@ const IMG = styled.img`
     animation: icon-animation 0.6s ease-in-out alternate infinite;
     transform-origin: center;
   }
+  
+  @keyframes icon-animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  } 
+}
 `;
 
 const LINK = styled(Link)`
