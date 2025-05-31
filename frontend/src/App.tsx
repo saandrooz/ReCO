@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
-import AccountDetails from "./pages/AccountDetails";
+import AccountDetails from "./pages/Profile";
 
 // Imports Components
 import Header from "./components/Header";

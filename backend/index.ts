@@ -24,6 +24,7 @@ app.get("/reco/Games", async (_request: Request, response: Response) => {
   response.send(rows);
 });
 
+
 // Get specific game details
 app.get("/reco/Games/:id", async (request: Request, response: Response) => {
   const { rows } = await client.query("SELECT * FROM games WHERE id = $1", [

@@ -3,9 +3,26 @@ import { Link } from "react-router-dom";
 // Styling/CSS
 import styled from "styled-components";
 
+// Imports Images/Icons
+import Game from "../assets/icons/games.png";
+import Home from "../assets/icons/home.png";
+import Profile from "../assets/icons/profile.png";
+
 const NAV = styled.div`
-  background-color: #2A1E33;
+  background-color: #2a1e33;
   margin-top: 0;
+  padding-top: 10px;
+`;
+
+const IMG = styled.img`
+  height: 25px;
+  width: auto;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+    animation: icon-animation 0.6s ease-in-out alternate infinite;
+    transform-origin: center;
+  }
 `;
 
 const LINK = styled(Link)`
@@ -20,9 +37,24 @@ function Nav() {
   return (
     <>
       <NAV>
-        <LINK to="/Games">Games</LINK>
-        <LINK to="/Home">Home</LINK>
-        <LINK to="/Account">Account</LINK>
+        <LINK to="/Games">
+          <IMG
+            alt="Icon of a hand controller that directs the user to browse more games."
+            src={Game}
+          />
+        </LINK>
+        <LINK to="/Home">
+          <IMG
+            alt="Icon of a house that directs the user to the home page."
+            src={Home}
+          />
+        </LINK>
+        <LINK to="/Account">
+          <IMG
+            alt="Icon of a person that directs the user to their profile."
+            src={Profile}
+          />
+        </LINK>
       </NAV>
     </>
   );

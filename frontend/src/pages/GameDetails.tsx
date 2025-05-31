@@ -77,14 +77,12 @@ interface Review {
   username: string;
 }
 
-
 function GameDetails() {
   const { id } = useParams();
   const location = useLocation();
   const [gameDetails, setGameDetails] = useState([]);
   const [gameGenres, setGameGenres] = useState([]);
-  const [gameReviews, setGameReviews] = useState([]);
-
+  const [gameReviews, setGameReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     if (id) {
@@ -109,6 +107,16 @@ function GameDetails() {
     }
   }, [location.key, id]);
 
+  function calcAvarageRating() {
+    if (gameReviews.length > 0) {
+      let sumReviews = 0;
+      for (let i = 0; i < gameReviews.length; i++) {
+        sumReviews += gameReviews[i].rating;
+      }
+
+      return Math.trunc((sumReviews / gameReviews.length) * 10) / 10;
+    }
+  }
 
   return (
     <>
@@ -119,7 +127,16 @@ function GameDetails() {
             {gameDetails.map((game: Game) => (
               <div className="container" key={game.id}>
                 <h1> {game.title} </h1>
-                <VIDEO width="320" height="240" controls muted>
+
+                {gameReviews ? (
+                  <div>
+                    <p>Average rating: {calcAvarageRating()}/10</p>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+
+                <VIDEO controls muted>
                   <source src={game.trailer} type="video/mp4" />
                 </VIDEO>
                 <div>
@@ -151,10 +168,16 @@ function GameDetails() {
           <REVIEWS>
             {gameReviews.map((review: Review) => (
               <div className="review_div" key={review.id}>
-                <p>User: {review.username}</p>
+                <p>
+                  Review by <strong>{review.username}</strong>
+                </p>
                 <p>Rating: {review.rating}/10</p>
                 <p>{review.review_text}</p>
-                <p>{review.created}</p>
+                <p>
+                  Posted {new Date(review.created).getFullYear()}/
+                  {new Date(review.created).getMonth() + 1}/
+                  {new Date(review.created).getDate()}
+                </p>
               </div>
             ))}
           </REVIEWS>
