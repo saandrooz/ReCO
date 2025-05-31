@@ -6,15 +6,13 @@ import styled from "styled-components";
 
 const DIV = styled.div`
   display: flex;
-  margin: 0;
+  flex-wrap: wrap;
   justify-content: center;
   background-color: hsla(274, 26%, 16%, 0.4);
   border: #d19efa solid 1px;
   border-radius: 15px;
   padding: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 25px;
+  margin: 25px 25px 0 25px;
 `;
 
 const P = styled.p`
@@ -30,6 +28,20 @@ const IMG = styled.img`
 
 const IMG_DIV = styled.div`
   position: relative;
+`;
+
+const BOX = styled.div`
+  background-color: #2a1e33;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 300px;
+  margin: 5px;
+  padding: 0 15px 25px 15px;
+  margin-bottom: 50px;
+`;
+
+const H2 = styled.h2`
+  font-size: 25px;
 `;
 
 // End of Styling/CSS
@@ -91,7 +103,9 @@ function Search() {
             <div>
               <DIV>
                 <div>
-                  <P>Could Not find any games matching your search input. :'C</P>
+                  <P>
+                    Could Not find any games matching your search input. :'C
+                  </P>
                 </div>
               </DIV>
             </div>
@@ -99,19 +113,24 @@ function Search() {
             <div>
               <DIV>
                 <div>
-                  <P>Was this what you searched for?</P>
+                  <P>Was this what you searched for? C: </P>
                 </div>
                 {searchedGame.map((game: Game) => (
-                  <div className="container" key={game.id}>
-                    <h2> {game.title} </h2>
+                  <BOX key={game.id}>
+                    <H2> {game.title} </H2>
                     <IMG_DIV>
                       <IMG alt="Image from the game." src={game.image} />
                     </IMG_DIV>
                     <button>
                       <Link to={"/Games/" + game.id}>Show More</Link>
                     </button>
-                  </div>
+                  </BOX>
                 ))}
+                  <div>
+                  <P>
+                    Couldn't find what you where looking for? Browse the games that we do have below!
+                  </P>
+                </div>
               </DIV>
             </div>
           ) : (
