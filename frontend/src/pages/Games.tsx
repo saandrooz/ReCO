@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // Imports Components
 import Nav from "../components/Nav";
 import Search from "../components/Search"
+import AverageRating from "../components/AverageRating";
 
 // Imports Images
 import steam from "../assets/images/steam-logo.png";
@@ -55,7 +56,6 @@ const STEAM = styled.img`
     }
   }
 `
-
 // End of Styling/CSS
 
 interface Game {
@@ -84,13 +84,14 @@ function Games() {
           <h1>Browse our collection of games!</h1>
           <p>Below is a collection of Co-Op and Multiplayer games</p>
         </div>
-        <Search></Search>
+        <Search />
         <div className="main_div">
           {games && (
             <div>
               {games.map((game: Game) => (
                 <div className="container" key={game.id}>
                   <h2> {game.title} </h2>
+                  <AverageRating id={game.id}/>
                   <IMG_DIV>
                     <IMG alt="Image from the game." src={game.image} />
                     <a href={game.steam_link} target="_blank">

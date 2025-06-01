@@ -5,7 +5,6 @@ import { useContext } from "react";
 // Imports Components
 import UserContext from "../components/UserContext";
 
-
 function DetectUser() {
   const { user } = useContext(UserContext);
   const nav = useNavigate();

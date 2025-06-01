@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 // Imports Components
 import Nav from "../components/Nav";
 import WriteReview from "../components/WriteReview";
+import AverageRating from "../components/AverageRating";
 
 // Imports Images
 import steam from "../assets/images/steam-logo.png";
@@ -15,13 +16,23 @@ import check from "../assets/images/check-steam.png";
 import styled from "styled-components";
 
 const VIDEO = styled.video`
-  width: 90%;
+  width: 100%;
   height: auto;
+
+  @media (min-width: 400px) {
+    width: 90%;
+    height: auto;
+  }
 `;
 
 const STEAM = styled.img`
-  height: 50px;
+  height: 40px;
   width: auto;
+
+  @media (min-width: 400px) {
+    height: 50px;
+    width: auto;
+  }
 
   &:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
@@ -30,9 +41,15 @@ const STEAM = styled.img`
   }
 `;
 const TEXT_IMG = styled.img`
-  height: 50px;
+  height: 39px;
   width: auto;
-  margin-right: 15px;
+  margin-right: 5px;
+
+  @media (min-width: 400px) {
+    height: 50px;
+    width: auto;
+    margin-right: 15px;
+  }
 `;
 
 const GENRE = styled.p`
@@ -46,6 +63,16 @@ const GENRE = styled.p`
 
 const REVIEWS = styled.div`
   padding: 10px 30px;
+`;
+
+const BOX = styled.div`
+  background-color: #2a1e33;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 600px;
+  margin: 20px;
+  padding: 0 15px 25px 15px;
+  margin-bottom: 50px;
 `;
 
 // End of Styling/CSS
@@ -82,7 +109,7 @@ function GameDetails() {
   const location = useLocation();
   const [gameDetails, setGameDetails] = useState([]);
   const [gameGenres, setGameGenres] = useState([]);
-  const [gameReviews, setGameReviews] = useState<Review[]>([]);
+  const [gameReviews, setGameReviews] = useState([]);
 
   useEffect(() => {
     if (id) {
@@ -99,6 +126,7 @@ function GameDetails() {
         .then((data) => setGameGenres(data));
     }
   }, [id]);
+
   useEffect(() => {
     if (id) {
       fetch("/reco/Reviews/" + id)
@@ -107,17 +135,6 @@ function GameDetails() {
     }
   }, [location.key, id]);
 
-  function calcAvarageRating() {
-    if (gameReviews.length > 0) {
-      let sumReviews = 0;
-      for (let i = 0; i < gameReviews.length; i++) {
-        sumReviews += gameReviews[i].rating;
-      }
-
-      return Math.trunc((sumReviews / gameReviews.length) * 10) / 10;
-    }
-  }
-
   return (
     <>
       <Nav />
@@ -125,25 +142,21 @@ function GameDetails() {
         {gameDetails && (
           <div className="main_div">
             {gameDetails.map((game: Game) => (
-              <div className="container" key={game.id}>
+              <BOX key={game.id}>
                 <h1> {game.title} </h1>
 
-                {gameReviews ? (
-                  <div>
-                    <p>Average rating: {calcAvarageRating()}/10</p>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
+                <AverageRating id={game.id} />
 
                 <VIDEO controls muted>
                   <source src={game.trailer} type="video/mp4" />
                 </VIDEO>
+
                 <div>
                   {gameGenres.map((genre: Genre) => (
                     <GENRE key={genre.id}>{genre.name}</GENRE>
                   ))}
                 </div>
+
                 <div>
                   <p> {game.description} </p>
                   <p>
@@ -157,7 +170,7 @@ function GameDetails() {
                     <STEAM alt="Steam Icon." src={steam} />
                   </a>
                 </div>
-              </div>
+              </BOX>
             ))}
           </div>
         )}

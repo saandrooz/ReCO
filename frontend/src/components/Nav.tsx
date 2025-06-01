@@ -63,7 +63,7 @@ function Nav() {
             src={Home}
           />
         </LINK>
-        <LINK to="/Account">
+        <LINK to="/Profile">
           <IMG
             alt="Icon of a person that directs the user to their profile."
             src={Profile}

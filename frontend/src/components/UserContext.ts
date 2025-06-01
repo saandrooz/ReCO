@@ -1,12 +1,12 @@
 import { createContext } from "react";
 
 interface UserType {
-  user: number;
-  setUser: (id: number) => void;
+  user: number | null;
+  setUser: (id: number | null) => void;
 }
 
 const defaultValue: UserType = {
-  user: 0,
+  user: null,
   setUser: () => {},
 };
 

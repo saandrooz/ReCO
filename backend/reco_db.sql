@@ -1,4 +1,4 @@
--- Har lagt in --
+-- TABLE for games --
 CREATE TABLE games (
 	id SERIAL PRIMARY KEY,
 	title TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE games (
 	steam_link TEXT NOT NULL
 );
 
--- Har lagt in --
+-- TABLE for users --
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	username TEXT UNIQUE NOT NULL, 
@@ -18,7 +18,7 @@ CREATE TABLE users (
 	created DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
--- Har lagt in --
+-- TABLE for reviews --
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	game_id INTEGER NOT NULL,
@@ -32,13 +32,13 @@ CREATE TABLE reviews (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Har lagt in --
+--TABLE for genres --
 CREATE TABLE genres (
 	id SERIAL PRIMARY KEY,
 	name TEXT NOT NULL
 );
 
--- Har lagt in --
+-- TABLE for game_genres to connect multiple genres to games --
 CREATE TABLE game_genres (
   id SERIAL PRIMARY KEY,
 	game_id INTEGER NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE game_genres (
   FOREIGN KEY (genre_id) REFERENCES genres(id)
 );
 
--- Tom INSERT för games för att kopiera och fylla med spel --
+-- Empty INSERT for games to copy and fill with information --
 INSERT INTO games (
 	title, 
 	developer, 
@@ -66,7 +66,7 @@ INSERT INTO games (
 		''
 		);
 
--- Har lagt in --
+-- INSERTS for games TABLE --
 INSERT INTO games (
 	title, 
 	developer, 
@@ -562,10 +562,10 @@ INSERT INTO games (
 		'https://store.steampowered.com/app/594650/Hunt_Showdown_1896/'
 		);
 
--- Tom INSERT för genres för att kopiera och fylla med genrer --
+-- Empty INSERT for genres to copy and fill with information --
 INSERT INTO genres (name) VALUES ('');
 
--- Har lagt in --
+-- INSERTS for genres TABLE --
 INSERT INTO genres (name) VALUES ('Horror');
 INSERT INTO genres (name) VALUES ('Sci-fi');
 INSERT INTO genres (name) VALUES ('Comedy');
@@ -590,12 +590,11 @@ INSERT INTO genres (name) VALUES ('Hack and Slash');
 INSERT INTO genres (name) VALUES ('Fantasy');
 INSERT INTO genres (name) VALUES ('Multiple Endings');
 
-
--- Tom INSERT för game_genres för att kopiera och fylla spel med genrer --
+-- Empty INSERT for game_genres to copy and fill with information --
 INSERT INTO game_genres (game_id, genre_id)
 VALUES (, );
 
--- Har lagt in --
+-- INSERTS for game_genres TABLE --
 INSERT INTO game_genres (game_id, genre_id)
 VALUES (1, 1);
 INSERT INTO game_genres (game_id, genre_id)
@@ -797,5 +796,5 @@ VALUES (31, 8);
 INSERT INTO game_genres (game_id, genre_id)
 VALUES (31, 14);
 
--- Exempel Review bara för att testa kod. Inserts görs egentligen via post på hemsidan -- 
+-- Example INSERT for reviews just to check and test the code - the real INSERT INTO reviews is made through the website itself -- 
 INSERT INTO reviews (game_id, user_id, rating, review_text) VALUES (1, 1, 10, 'The Huntsman shows up in my nightmares and the Taxman is after me. I fear for my life. 10/10 would recommend.');

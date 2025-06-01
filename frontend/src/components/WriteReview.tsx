@@ -14,6 +14,7 @@ const myStyles = {
   activeFillColor: '#D19EFA',
   inactiveFillColor: '#F5F5F5'
 }
+// End of Styling/CSS
 
 function WriteReview() {
   const { user } = useContext(UserContext);

@@ -12,7 +12,7 @@ import Context from "../components/UserContext";
 // End of Styling/CSS
 
 function LogIn() {
-  const { user, setUser } = useContext(Context);
+  const { setUser } = useContext(Context);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,8 +52,6 @@ function LogIn() {
                   setUser(result.id);
                   setEmail("");
                   setPassword("");
-                  console.log(user)
-                  console.log(result.id)
                   nav("/Home");
                 })
                 .catch((error) => {

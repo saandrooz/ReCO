@@ -28,6 +28,7 @@ function Home() {
 
           <p>
             Not sure what Co-Op and Multiplayer mean? Here's a quick rundown:
+          </p>
             <ul>
               <li>
                 <strong>Co-Op (Cooperative) games</strong> are designed for
@@ -43,7 +44,6 @@ function Home() {
                 facing off, there's something for everyone.
               </li>
             </ul>
-          </p>
 
           <p>
             On ReCO, you'll find honest, community-written reviews to help you

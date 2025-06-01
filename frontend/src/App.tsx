@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
-import AccountDetails from "./pages/Profile";
+import Profile from "./pages/Profile";
 
 // Imports Components
 import Header from "./components/Header";
@@ -16,7 +16,7 @@ import UserContext from "./components/UserContext";
 import DetectUser from "./components/DetectUser";
 
 function App() {
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState<number | null>(null);
 
   const router = createHashRouter([
     {
@@ -26,7 +26,7 @@ function App() {
         { element: <Home />, path: "/Home" },
         { element: <Games />, path: "/Games" },
         { element: <GameDetails />, path: "/Games/:id" },
-        { element: <AccountDetails />, path: "/Account" },
+        { element: <Profile />, path: "/Profile" },
       ],
       element: (
         <>

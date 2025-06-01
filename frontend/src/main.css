@@ -37,13 +37,13 @@ h1 {
   padding: 10px;
   padding-top: 25px;
   font-family: Pixel-Bold;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 h2 {
   padding-top: 25px;
   font-family: Pixel-Bold;
-  font-size: 35px;
+  font-size: 25px;
 }
 
 textarea {
@@ -53,6 +53,10 @@ textarea {
 
 strong {
   font-family: Roboto-Bold;
+}
+
+p {
+  line-height: 150%;
 }
 /* General CSS -- END */
 
@@ -153,7 +157,6 @@ button > a {
   max-width: 200px;
   margin: auto; 
   filter: drop-shadow(0 0 2em #646cffaa);
-  padding-top: 20px;
 }
 
 .rating:hover {
@@ -165,8 +168,33 @@ button > a {
 
 
 
-/* Responsive Design */
-@media screen and (min-width: 980px) {
+/* Responsive CSS -- START */
+@media screen and (min-width: 600px) {
+
+  /* General Responsive CSS -- START */
+  h1 {
+    padding: 10px;
+    padding-top: 25px;
+    font-family: Pixel-Bold;
+    font-size: 40px;
+  }
+  
+  h2 {
+    padding-top: 25px;
+    font-family: Pixel-Bold;
+    font-size: 35px;
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    margin-top: 10px; 
+    max-width: 300px;
+    margin: auto; 
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+
 
   
  }

@@ -2,6 +2,17 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { Rating, RoundedStar } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+
+// Styling/CSS
+const myStyles = {
+  itemShapes: RoundedStar,
+  activeFillColor: "#D19EFA",
+  inactiveFillColor: "#F5F5F5",
+};
+// End of Styling/CSS
+
 
 // Imports Components
 import Nav from "../components/Nav";
@@ -48,9 +59,9 @@ function AccountDetails() {
   }, [user]);
 
   function logOutUser() {
-    setUser(0);
-    nav("/");
     localStorage.removeItem("loggedInUser");
+    setUser(null);
+    nav("/");
   }
 
   return (
@@ -59,12 +70,16 @@ function AccountDetails() {
       {userInfo && (
         <div>
           {userInfo.map((user: User) => (
-            <div className="main_div">
-              <div className="container" key={user.id}>
+            <div className="main_div" key={user.id}>
+              <div className="container">
                 <h1>Hello {user.username}!</h1>
                 <h2>Account information:</h2>
                 <p>Email: {user.email}</p>
-                <p>Account Created: {user.created}</p>
+                <p>
+                  Account Created: {new Date(user.created).getFullYear()}/
+                  {new Date(user.created).getMonth() + 1}/
+                  {new Date(user.created).getDate()}
+                </p>
               </div>
             </div>
           ))}
@@ -72,7 +87,14 @@ function AccountDetails() {
             <div className="main_div">
               <div className="container" key={review.id}>
                 <h2>{review.title}</h2>
-                <p>{review.rating}/10</p>
+                <Rating
+                  className="rating"
+                  value={review.rating}
+                  itemStyles={myStyles}
+                  items={10}
+                  readOnly
+                />
+                <p>You rated this game {review.rating}/10</p>
                 <p>{review.review_text}</p>
                 <button>
                   <Link to={"/Games/" + review.game_id}>Go to game page</Link>

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Imports Components
+import AverageRating from "../components/AverageRating";
+
 // Styling/CSS
 import styled from "styled-components";
 
@@ -38,6 +41,10 @@ const BOX = styled.div`
   max-width: 300px;
   padding: 0 5px 25px 5px;
   margin: 25px 20px;
+
+  @media (min-width: 600px) {
+    padding: 0 25px 25px 25px;
+  }
 `;
 
 const H2 = styled.h2`
@@ -45,6 +52,31 @@ const H2 = styled.h2`
   padding: 0;
 `;
 
+const BTN = styled.button`
+  margin: 10px auto 0;
+  display: block;
+  border: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-family: inherit;
+  background-color: #d19efa;
+  cursor: pointer;
+  transition: filter 1s;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+    animation: button-animation 0.6s ease-in-out alternate infinite;
+    transform-origin: center;
+  }
+`;
+
+const LINK = styled(Link)`
+  color: #2a1e33;
+  text-decoration: none;
+  font-size: 15px;
+`;
 
 // End of Styling/CSS
 
@@ -63,10 +95,6 @@ function Search() {
   const [searchedGame, setSearchedGame] = useState<Game[]>([]);
   const [games, setGames] = useState<Game[]>([]);
 
-  console.log(title);
-  console.log(searchedGame);
-  console.log(games);
-
   useEffect(() => {
     fetch("/reco/Games")
       .then((response) => response.json())
@@ -74,10 +102,8 @@ function Search() {
   }, []);
 
   function handleSearch(title: string) {
-    console.log("searching...");
     const filterBySearch = games.filter((game) => {
       if (game.title.toLowerCase().includes(title.toLowerCase())) {
-        console.log("Game:", game);
         return game;
       }
     });
@@ -102,33 +128,29 @@ function Search() {
         ></input>
         <div>
           {searchedGame.length === 0 && title.length > 0 ? (
-            <div>
-              <DIV>
-                <div>
-                  <P>
-                    Could Not find any games matching your search input. :'C
-                  </P>
-                </div>
-              </DIV>
-            </div>
+            <DIV>
+              <P>Could Not find any games matching your search input. :'C</P>
+            </DIV>
           ) : searchedGame.length > 0 ? (
             <div>
               <DIV>
-                  <P>Was this what you searched for? C: </P>
+                <P>Was this what you searched for? C: </P>
                 {searchedGame.map((game: Game) => (
                   <BOX key={game.id}>
                     <H2> {game.title} </H2>
+                    <AverageRating id={game.id} />
                     <IMG_DIV>
                       <IMG alt="Image from the game." src={game.image} />
                     </IMG_DIV>
-                    <button>
-                      <Link to={"/Games/" + game.id}>Show More</Link>
-                    </button>
+                    <BTN>
+                      <LINK to={"/Games/" + game.id}>Show More</LINK>
+                    </BTN>
                   </BOX>
                 ))}
-                  <P>
-                    Couldn't find what you where looking for? Browse the games that we do have below!
-                  </P>
+                <P>
+                  Couldn't find what you where looking for? Browse the games
+                  that we do have below!
+                </P>
               </DIV>
             </div>
           ) : (
