@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Imports Components
 import Nav from "../components/Nav";
-import Search from "../components/Search"
+import Search from "../components/Search";
 import AverageRating from "../components/AverageRating";
 
 // Imports Images
@@ -16,6 +16,16 @@ const IMG_DIV = styled.div`
   position: relative;
 `;
 
+const DIV1 = styled.div`
+  background-color: #2a1e33;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  min-width: 90%;
+  max-width: 90%;
+  margin: 25px;
+  padding-bottom: 20px;
+`;
+
 const IMG = styled.img`
   width: 90%;
   height: auto;
@@ -24,12 +34,22 @@ const IMG = styled.img`
   max-width: 500px;
 `;
 
+const BOX = styled.div`
+  background-color: #2a1e33;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 500px;
+  margin: 20px;
+  padding: 0 15px 25px 15px;
+  margin-bottom: 50px;
+`;
+
 const STEAM = styled.img`
   width: 40px;
   height: auto;
   position: absolute;
-  bottom: -10px;    
-  right: 5px;    
+  bottom: -10px;
+  right: 5px;
   z-index: 2;
   transition: filter 0.3s ease;
 
@@ -55,7 +75,7 @@ const STEAM = styled.img`
       transform: rotate(360deg);
     }
   }
-`
+`;
 // End of Styling/CSS
 
 interface Game {
@@ -80,32 +100,37 @@ function Games() {
   return (
     <>
       <Nav />
-        <div>
-          <h1>Browse our collection of games!</h1>
-          <p>Below is a collection of Co-Op and Multiplayer games</p>
-        </div>
-        <Search />
-        <div className="main_div">
-          {games && (
-            <div>
-              {games.map((game: Game) => (
-                <div className="container" key={game.id}>
-                  <h2> {game.title} </h2>
-                  <AverageRating id={game.id}/>
-                  <IMG_DIV>
-                    <IMG alt="Image from the game." src={game.image} />
-                    <a href={game.steam_link} target="_blank">
-                      <STEAM alt="Steam Icon." src={steam} />
-                    </a>
-                  </IMG_DIV>
-                  <button>
-                    <Link to={"/Games/" + game.id}>Show More</Link>
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className="main_div">
+        <DIV1>
+          <h1>Explore Our Game Collection!</h1>
+          <p>
+            Here you'll find a growing collection of games designed for shared
+            experiences - from casual co-op fun to intense multiplayer battles.
+          </p>
+        </DIV1>
+      </div>
+      <Search />
+      <div className="main_div">
+        {games && (
+          <div>
+            {games.map((game: Game) => (
+              <BOX key={game.id}>
+                <h2> {game.title} </h2>
+                <AverageRating id={game.id} />
+                <IMG_DIV>
+                  <IMG alt="Image from the game." src={game.image} />
+                  <a href={game.steam_link} target="_blank">
+                    <STEAM alt="Steam Icon." src={steam} />
+                  </a>
+                </IMG_DIV>
+                <button>
+                  <Link to={"/Games/" + game.id}>Show More</Link>
+                </button>
+              </BOX>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }

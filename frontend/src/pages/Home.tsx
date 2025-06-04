@@ -1,13 +1,33 @@
 import { Link } from "react-router-dom";
 
+// Imports Images
+import star from '../assets/icons/star.png'
+
 // Imports Components
 import Nav from "../components/Nav";
 
 // Styling/CSS -- START
 import styled from "styled-components";
 
+const IMG = styled.img`
+  width: 30px;
+  height: auto;
+`
+const UL = styled.ul`
+  padding: 0;
+`
+
+const LI = styled.li`
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #d19efa; 
+  border-radius: 10px;
+`
+
 const H2 = styled.h2`
   padding-top: 50px;
+  border-top: 1px solid #d19efa;
 `;
 // Styling/CSS -- END
 
@@ -19,7 +39,7 @@ function Home() {
         <div className="container">
           <h1>Welcome to ReCO!</h1>
           <p>
-            ReCO — our playful mix of "Co-Op" and "Recommendation" 😉 — is your
+            ReCO — our playful mix of "Co-Op" and "Recommendation" — is your
             go-to website for discovering and reviewing the best{" "}
             <strong>Co-Op</strong> and <strong>Multiplayer</strong> games out
             there. Whether you're planning a chill evening with friends or an
@@ -27,23 +47,23 @@ function Home() {
           </p>
 
           <p>
-            Not sure what Co-Op and Multiplayer mean? Here's a quick rundown:
+            Not sure what Co-Op and Multiplayer mean? <br /> Here's a quick rundown:
           </p>
-            <ul>
-              <li>
+            <UL>
+              <LI>
                 <strong>Co-Op (Cooperative) games</strong> are designed for
                 players to <em>work together</em> as a team toward a common
                 goal — perfect for bonding, strategizing, and laughing your way
                 through missions.
-              </li>
+              </LI>
               <br />
-              <li>
+              <LI>
                 <strong>Multiplayer games</strong> simply mean more than one
                 person can play. This includes both <em>cooperative</em> and{" "}
                 <em>competitive</em> gameplay — so whether you're teaming up or
                 facing off, there's something for everyone.
-              </li>
-            </ul>
+              </LI>
+            </UL>
 
           <p>
             On ReCO, you'll find honest, community-written reviews to help you
@@ -54,18 +74,18 @@ function Home() {
 
           <p>
             Every game listed on ReCO is available on <strong>Steam</strong>,
-            making it easy to jump in and start playing.
+            making it easy to jump in and start playing right away.
           </p>
 
-          <H2>Browse Our Games!</H2>
+          <H2>Browse Our Games!</H2> 
           <button>
-            <Link to="/games">Browse games</Link>
+            <Link to="/games">Browse Games</Link>
           </button>
           <br />
           <p>
             Don't forget to submit your own reviews to help others discover
-            their next favorite game! 😄
-          </p>
+            their next favorite game! 
+          </p><IMG alt="Icon of a star." src={star} />
         </div>
       </div>
     </>

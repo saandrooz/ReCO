@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Styling/CSS
 import styled from "styled-components";
@@ -39,11 +39,15 @@ const IMG = styled.img`
 }
 `;
 
-const LINK = styled(Link)`
+const LINK = styled(NavLink)`
   text-decoration: none;
   color: #d19efa;
   padding: 5px 40px;
   font-size: large;
+
+  &.active img{
+    border-bottom: 2px solid #d19efa; 
+  }
 `;
 // End of Styling/CSS
 

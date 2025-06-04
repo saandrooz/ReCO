@@ -13,7 +13,6 @@ const myStyles = {
 };
 // End of Styling/CSS
 
-
 // Imports Components
 import Nav from "../components/Nav";
 import UserContext from "../components/UserContext";
@@ -83,28 +82,44 @@ function AccountDetails() {
               </div>
             </div>
           ))}
-          {userReviews.map((review: Review) => (
+          {userReviews.length > 0 ? (
+            <div>
+              {userReviews.map((review: Review) => (
+                <div className="main_div" key={review.id}>
+                  <div className="container">
+                    <h2>{review.title}</h2>
+                    <Rating
+                      className="rating"
+                      value={review.rating}
+                      itemStyles={myStyles}
+                      items={10}
+                      readOnly
+                    />
+                    <p>You rated this game {review.rating}/10</p>
+                    <p>{review.review_text}</p>
+                    <button>
+                      <Link to={"/Games/" + review.game_id}>
+                        Go To Game Page
+                      </Link>
+                    </button>
+                  </div>
+                </div>
+              ))}{" "}
+            </div>
+          ) : (
             <div className="main_div">
-              <div className="container" key={review.id}>
-                <h2>{review.title}</h2>
-                <Rating
-                  className="rating"
-                  value={review.rating}
-                  itemStyles={myStyles}
-                  items={10}
-                  readOnly
-                />
-                <p>You rated this game {review.rating}/10</p>
-                <p>{review.review_text}</p>
+              <div className="container">
+                <h2>No Reviews Yet</h2>
+                <p>Start browsing our games and share your thoughts!</p>
                 <button>
-                  <Link to={"/Games/" + review.game_id}>Go to game page</Link>
+                  <Link to={"/Games"}>Browse Games</Link>
                 </button>
               </div>
             </div>
-          ))}
+          )}
         </div>
       )}
-      <button onClick={logOutUser}>Log out</button>
+      <button onClick={logOutUser}>LOG OUT</button>
     </>
   );
 }

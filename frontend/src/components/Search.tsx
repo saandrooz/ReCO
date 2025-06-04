@@ -1,11 +1,34 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Imports Images
+import search from "../assets/icons/search.png";
+
 // Imports Components
 import AverageRating from "../components/AverageRating";
 
 // Styling/CSS
 import styled from "styled-components";
+
+const INPUT = styled.input`
+  width: 80%;
+  max-width: 500px;
+  background-color: #f5f5f5;
+  text-align: center;
+  font-size: 15px;
+  color: #2a1e33;
+  border: #d19efa solid 3px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: #d19efa solid 1px;
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+
+  @media (min-width: 600px) {
+    padding: 5px 0;
+  }
+`;
 
 const DIV = styled.div`
   display: flex;
@@ -18,9 +41,30 @@ const DIV = styled.div`
   margin: 25px 25px 0 25px;
 `;
 
+const DIV1 = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: hsla(274, 26%, 16%, 0.4);
+  max-width: 90%;
+  align-items: center;
+  margin: auto;
+  padding: 10px;
+  border: #d19efa solid 1px;
+  border-radius: 10px;
+`;
+
 const P = styled.p`
   color: #d19efa;
   flex-basis: 100%;
+`;
+
+const ICON = styled.img`
+  width: 20px;
+  height: auto;
+  padding: 5px;
+  border: #d19efa solid 2px;
+  border-radius: 100px;
+  margin-left: 10px;
 `;
 
 const IMG = styled.img`
@@ -59,8 +103,8 @@ const BTN = styled.button`
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 5px 10px;
-  font-weight: bold;
-  font-family: inherit;
+  font-size: 18px;
+  font-family: WDX;
   background-color: #d19efa;
   cursor: pointer;
   transition: filter 1s;
@@ -75,7 +119,6 @@ const BTN = styled.button`
 const LINK = styled(Link)`
   color: #2a1e33;
   text-decoration: none;
-  font-size: 15px;
 `;
 
 // End of Styling/CSS
@@ -112,29 +155,32 @@ function Search() {
 
   return (
     <>
-      <div className="search_div">
-        <input
-          onChange={(event) => {
-            setTitle(event.target.value);
-            if (event.target.value !== "") {
-              handleSearch(event.target.value);
-            } else {
-              setSearchedGame([]);
-            }
-          }}
-          placeholder="Search game by title..."
-          type="text"
-          value={title}
-        ></input>
+      <div>
+        <DIV1>
+          <INPUT
+            onChange={(event) => {
+              setTitle(event.target.value);
+              if (event.target.value !== "") {
+                handleSearch(event.target.value);
+              } else {
+                setSearchedGame([]);
+              }
+            }}
+            placeholder="Search game by title..."
+            type="text"
+            value={title}
+          ></INPUT>
+          <ICON alt="Search icon." src={search} />
+        </DIV1>
         <div>
           {searchedGame.length === 0 && title.length > 0 ? (
             <DIV>
-              <P>Could Not find any games matching your search input. :'C</P>
+              <P>Could Not find any games matching your search input.</P>
             </DIV>
           ) : searchedGame.length > 0 ? (
             <div>
               <DIV>
-                <P>Was this what you searched for? C: </P>
+                <P>Was this what you searched for?</P>
                 {searchedGame.map((game: Game) => (
                   <BOX key={game.id}>
                     <H2> {game.title} </H2>

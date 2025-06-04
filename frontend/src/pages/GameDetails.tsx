@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { Rating, RoundedStar } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 
 // Imports Components
 import Nav from "../components/Nav";
@@ -14,6 +16,12 @@ import check from "../assets/images/check-steam.png";
 
 // Styling/CSS
 import styled from "styled-components";
+
+const myStyles = {
+  itemShapes: RoundedStar,
+  activeFillColor: "#D19EFA",
+  inactiveFillColor: "#F5F5F5",
+};
 
 const VIDEO = styled.video`
   width: 100%;
@@ -61,10 +69,6 @@ const GENRE = styled.p`
   border-radius: 15px;
 `;
 
-const REVIEWS = styled.div`
-  padding: 10px 30px;
-`;
-
 const BOX = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
@@ -73,6 +77,23 @@ const BOX = styled.div`
   margin: 20px;
   padding: 0 15px 25px 15px;
   margin-bottom: 50px;
+`;
+
+const P = styled.p`
+  color: #d19efa;
+  font-size: 10px;
+
+  @media (min-width: 600px) {
+    font-size: 12px;
+  }
+`;
+
+const DATE = styled.p`
+  font-size: 10px;
+
+  @media (min-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 // End of Styling/CSS
@@ -144,19 +165,15 @@ function GameDetails() {
             {gameDetails.map((game: Game) => (
               <BOX key={game.id}>
                 <h1> {game.title} </h1>
-
                 <AverageRating id={game.id} />
-
                 <VIDEO controls muted>
                   <source src={game.trailer} type="video/mp4" />
                 </VIDEO>
-
                 <div>
                   {gameGenres.map((genre: Genre) => (
                     <GENRE key={genre.id}>{genre.name}</GENRE>
                   ))}
                 </div>
-
                 <div>
                   <p> {game.description} </p>
                   <p>
@@ -178,27 +195,35 @@ function GameDetails() {
       <div className="main_div">
         <div className="container">
           <h2>See what other think!</h2>
-          <REVIEWS>
+          <div>
             {gameReviews.map((review: Review) => (
               <div className="review_div" key={review.id}>
-                <p>
-                  Review by <strong>{review.username}</strong>
-                </p>
-                <p>Rating: {review.rating}/10</p>
+                <h3>Review by {review.username}</h3>
+
+                <Rating
+                  className="rating"
+                  value={review.rating}
+                  itemStyles={myStyles}
+                  items={10}
+                  readOnly
+                />
+                <P>
+                  {review.username} gave this game a rating of {review.rating}/10
+                </P>
                 <p>{review.review_text}</p>
-                <p>
+                <DATE>
                   Posted {new Date(review.created).getFullYear()}/
                   {new Date(review.created).getMonth() + 1}/
                   {new Date(review.created).getDate()}
-                </p>
+                </DATE>
               </div>
             ))}
-          </REVIEWS>
+          </div>
         </div>
       </div>
       <WriteReview />
       <button>
-        <Link to={"/Games"}>Browse more games</Link>
+        <Link to={"/Games"}>Browse More Games</Link>
       </button>
     </>
   );
