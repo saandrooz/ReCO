@@ -118,8 +118,7 @@ app.get("/reco/Profile/:id", async (request: Request, response: Response) => {
 });
 
 // Get users published reviews for profile page
-app.get(
-  "/reco/UserReviews/:id",
+app.get("/reco/UserReviews/:id",
   async (request: Request, response: Response) => {
     const { rows } = await client.query(
       "SELECT reviews.id, reviews.game_id, reviews.user_id, reviews.rating, reviews.review_text, reviews.created, games.title FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE reviews.user_id = $1",
