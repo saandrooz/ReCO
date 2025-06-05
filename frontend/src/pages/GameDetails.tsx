@@ -148,6 +148,7 @@ function GameDetails() {
     }
   }, [id]);
 
+  /* location.key ensure that reviews are fetched again every time the user navigates to a game page, even if the id hasn't changed. Without location.key, the useEffect might not trigger again because the id remains the same, and React assumes there's no need to re-run the effect. By including location.key in the dependency array, useEffect is forced to run every time the user navigates to the page even if the id is unchanged. It listens for navigation events, not just URL parameter changes. */
   useEffect(() => {
     if (id) {
       fetch("/reco/Reviews/" + id)
