@@ -6,21 +6,25 @@ import { useContext } from "react";
 import UserContext from "../components/UserContext";
 
 function DetectUser() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const nav = useNavigate();
 
   useEffect(() => {
+    const getUser = Number(localStorage.getItem("loggedInUser"));
+
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
       nav("/Home");
-    } else {
+    } else if (user === null && getUser) {
+      setUser(getUser);
+      nav("/Home");
+    } else if (user === undefined) {
       localStorage.removeItem("loggedInUser");
       nav("/");
     }
-  }, [user, nav]);
+  }, [user, setUser, nav]);
 
-  return (null)
-
+  return null;
 }
 
-export default DetectUser
+export default DetectUser;

@@ -13,14 +13,13 @@ const myStyles = {
 };
 
 const P = styled.p`
-  color: #D19EFA;
+  color: #d19efa;
   font-size: 10px;
 
   @media (min-width: 600px) {
     font-size: 12px;
   }
-`
-
+`;
 // End of Styling/CSS
 
 interface IdProps {
@@ -53,17 +52,15 @@ function AverageRating(props: IdProps) {
       for (let i = 0; i < gameReviews.length; i++) {
         sumReviews += gameReviews[i].rating;
       }
-
       return Math.trunc((sumReviews / gameReviews.length) * 10) / 10;
     }
-
     return 0;
   }
 
   return (
     <>
       {gameReviews ? (
-        <div>
+        <div className="rating">
           <Rating
             className="rating"
             value={calcAverageRating()}
@@ -71,7 +68,10 @@ function AverageRating(props: IdProps) {
             items={10}
             readOnly
           />
-          <P>(An average rating of {calcAverageRating()}/10 based on {gameReviews.length} reviews)</P>
+          <P>
+            (An average rating of {calcAverageRating()}/10 based on{" "}
+            {gameReviews.length} reviews)
+          </P>
         </div>
       ) : (
         <div></div>

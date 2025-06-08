@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
 
 // Imports Components
 import Nav from "../components/Nav";
 import Search from "../components/Search";
 import AverageRating from "../components/AverageRating";
+import UserContext from "../components/UserContext";
 
 // Imports Images
 import steam from "../assets/images/steam-logo.png";
@@ -89,7 +92,17 @@ interface Game {
 }
 
 function Games() {
-  const [games, setGames] = useState([]);
+  /* Check if user is logged in, if not, redirects user to log in page */
+  const { user } = useContext(UserContext);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      nav("/");
+    }
+  }, [user, nav]);
+
+  const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
     fetch("/reco/Games")
@@ -100,37 +113,43 @@ function Games() {
   return (
     <>
       <Nav />
-      <div className="main_div">
-        <DIV1>
-          <h1>Explore Our Game Collection!</h1>
-          <p>
-            Here you'll find a growing collection of games designed for shared
-            experiences - from casual co-op fun to intense multiplayer battles.
-          </p>
-        </DIV1>
-      </div>
-      <Search />
-      <div className="main_div">
-        {games && (
-          <div>
-            {games.map((game: Game) => (
-              <BOX key={game.id}>
-                <h2> {game.title} </h2>
-                <AverageRating id={game.id} />
-                <IMG_DIV>
-                  <IMG alt="Image from the game." src={game.image} />
-                  <a href={game.steam_link} target="_blank">
-                    <STEAM alt="Steam Icon." src={steam} />
-                  </a>
-                </IMG_DIV>
-                <button>
-                  <Link to={"/Games/" + game.id}>Show More</Link>
-                </button>
-              </BOX>
-            ))}
-          </div>
-        )}
-      </div>
+
+      <main>
+        <div className="main_div">
+          <DIV1>
+            <h1>Explore Our Game Collection!</h1>
+            <p>
+              Here you'll find a growing collection of games designed for shared
+              experiences - from casual co-op fun to intense multiplayer
+              battles.
+            </p>
+          </DIV1>
+        </div>
+
+        <Search />
+
+        <div className="main_div">
+          {games && (
+            <div>
+              {games.map((game: Game) => (
+                <BOX key={game.id}>
+                  <h2> {game.title} </h2>
+                  <AverageRating id={game.id} />
+                  <IMG_DIV>
+                    <IMG alt="Image from the game." src={game.image} />
+                    <a href={game.steam_link} target="_blank">
+                      <STEAM alt="Steam Icon." src={steam} />
+                    </a>
+                  </IMG_DIV>
+                  <button>
+                    <Link to={"/Games/" + game.id}>More Info</Link>
+                  </button>
+                </BOX>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
     </>
   );
 }

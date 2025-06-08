@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 interface UserType {
-  user: number | null;
-  setUser: (id: number | null) => void;
+  user: number | null | undefined;
+  setUser: (id: number | null | undefined) => void;
 }
 
 const defaultValue: UserType = {

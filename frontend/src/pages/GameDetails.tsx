@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
 
 // Imports Components
 import Nav from "../components/Nav";
 import WriteReview from "../components/WriteReview";
 import AverageRating from "../components/AverageRating";
+import UserContext from "../components/UserContext";
 
 // Imports Images
 import steam from "../assets/images/steam-logo.png";
@@ -95,7 +98,6 @@ const DATE = styled.p`
     font-size: 12px;
   }
 `;
-
 // End of Styling/CSS
 
 interface Game {
@@ -126,11 +128,21 @@ interface Review {
 }
 
 function GameDetails() {
+  /* Check if user is logged in, if not, redirects user to log in page */
+  const { user } = useContext(UserContext);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      nav("/");
+    }
+  }, [user, nav]);
+
   const { id } = useParams();
   const location = useLocation();
-  const [gameDetails, setGameDetails] = useState([]);
-  const [gameGenres, setGameGenres] = useState([]);
-  const [gameReviews, setGameReviews] = useState([]);
+  const [gameDetails, setGameDetails] = useState<Game[]>([]);
+  const [gameGenres, setGameGenres] = useState<Genre[]>([]);
+  const [gameReviews, setGameReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     if (id) {
@@ -160,72 +172,81 @@ function GameDetails() {
   return (
     <>
       <Nav />
-      <div>
-        {gameDetails && (
-          <div className="main_div">
-            {gameDetails.map((game: Game) => (
-              <BOX key={game.id}>
-                <h1> {game.title} </h1>
-                <AverageRating id={game.id} />
-                <VIDEO controls muted>
-                  <source src={game.trailer} type="video/mp4" />
-                </VIDEO>
-                <div>
-                  {gameGenres.map((genre: Genre) => (
-                    <GENRE key={genre.id}>{genre.name}</GENRE>
-                  ))}
-                </div>
-                <div>
-                  <p> {game.description} </p>
-                  <p>
-                    {" "}
-                    {game.title} is developed by {game.developer}.
-                  </p>
-                </div>
-                <div>
-                  <TEXT_IMG alt="Check it out on Steam." src={check} />
-                  <a href={game.steam_link} target="_blank">
-                    <STEAM alt="Steam Icon." src={steam} />
-                  </a>
-                </div>
-              </BOX>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="main_div">
-        <div className="container">
-          <h2>See what other think!</h2>
-          <div>
-            {gameReviews.map((review: Review) => (
-              <div className="review_div" key={review.id}>
-                <h3>Review by {review.username}</h3>
 
-                <Rating
-                  className="rating"
-                  value={review.rating}
-                  itemStyles={myStyles}
-                  items={10}
-                  readOnly
-                />
-                <P>
-                  {review.username} gave this game a rating of {review.rating}/10
-                </P>
-                <p>{review.review_text}</p>
-                <DATE>
-                  Posted {new Date(review.created).getFullYear()}/
-                  {new Date(review.created).getMonth() + 1}/
-                  {new Date(review.created).getDate()}
-                </DATE>
-              </div>
-            ))}
+      <main>
+        <div>
+          {gameDetails && (
+            <div className="main_div">
+              {gameDetails.map((game: Game) => (
+                <BOX key={game.id}>
+                  <h1> {game.title} </h1>
+                  <AverageRating id={game.id} />
+                  <VIDEO controls muted>
+                    <source src={game.trailer} type="video/mp4" />
+                  </VIDEO>
+                  <div>
+                    {gameGenres.map((genre: Genre) => (
+                      <GENRE key={genre.id}>{genre.name}</GENRE>
+                    ))}
+                  </div>
+                  <div>
+                    <p> {game.description} </p>
+                    <p>
+                      {" "}
+                      {game.title} is developed by {game.developer}.
+                    </p>
+                  </div>
+                  <div>
+                    <TEXT_IMG alt="Check it out on Steam." src={check} />
+                    <a href={game.steam_link} target="_blank">
+                      <STEAM alt="Steam Icon." src={steam} />
+                    </a>
+                  </div>
+                </BOX>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="main_div">
+          <div className="container">
+            <h2>See what other think!</h2>
+            <div>
+              {gameReviews.map((review: Review) => (
+                <div className="review_div" key={review.id}>
+                  <h3>Review by {review.username}</h3>
+
+                  <Rating
+                    className="rating"
+                    value={review.rating}
+                    itemStyles={myStyles}
+                    items={10}
+                    readOnly
+                  />
+                  <P>
+                    {review.username} gave this game a rating of {review.rating}
+                    /10
+                  </P>
+                  <p>{review.review_text}</p>
+                  <DATE>
+                    Posted {new Date(review.created).getFullYear()}/
+                    {new Date(review.created).getMonth() + 1}/
+                    {new Date(review.created).getDate()}
+                  </DATE>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <WriteReview />
-      <button>
-        <Link to={"/Games"}>Browse More Games</Link>
-      </button>
+
+        <WriteReview />
+
+        <div className="main_div">
+          <button>
+            <Link to={"/Games"}>Browse More Games</Link>
+          </button>
+        </div>
+      </main>
     </>
   );
 }

@@ -28,26 +28,26 @@ client.connect();
 // Get all games
 app.get("/reco/Games", (_request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT * FROM games");
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 // Get specific game details
 app.get("/reco/Games/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT * FROM games WHERE id = $1", [
         request.params.id,
     ]);
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 // Get game genres
 app.get("/reco/Genres/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const gameID = request.params.id;
     const { rows } = yield client.query("SELECT * FROM game_genres INNER JOIN genres ON game_genres.genre_id = genres.id WHERE game_id = $1", [gameID]);
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 // Get reviews for a specific game and get username of published review
 app.get("/reco/Reviews/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const gameID = request.params.id;
     const { rows } = yield client.query("SELECT reviews.id, reviews.rating, reviews.review_text, reviews.created, users.username FROM reviews INNER JOIN users ON reviews.user_id = users.id WHERE reviews.game_id = $1", [gameID]);
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 // Post new review for a game
 app.post("/reco/NewReview/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,7 +56,7 @@ app.post("/reco/NewReview/:id", (request, response) => __awaiter(void 0, void 0,
     const rating = request.body.rating;
     const text = request.body.review_text;
     const { rows } = yield client.query("INSERT INTO reviews (game_id, user_id, rating, review_text) VALUES ($1, $2, $3, $4)", [gameID, userID, rating, text]);
-    response.send(rows);
+    response.status(201).send(rows);
 }));
 // Create/Register account/user
 app.post("/reco/Register", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
@@ -64,15 +64,15 @@ app.post("/reco/Register", (request, response) => __awaiter(void 0, void 0, void
     const email = request.body.email;
     const password = request.body.password;
     const { rows } = yield client.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)", [username, email, password]);
-    response.send(rows);
+    response.status(201).send(rows);
 }));
-// Log in user/page
+// Log in user
 app.post("/reco/", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const email = request.body.email;
     const password = request.body.password;
     const { rows } = yield client.query("SELECT id, username, email, created FROM users WHERE email = $1 AND password = $2", [email, password]);
     if (rows && rows.length > 0) {
-        response.send(rows[0]);
+        response.status(200).send(rows[0]);
     }
     else {
         response.status(401).send(null);
@@ -81,12 +81,12 @@ app.post("/reco/", (request, response) => __awaiter(void 0, void 0, void 0, func
 // Get user details for profile page
 app.get("/reco/Profile/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT * FROM users WHERE users.id = $1", [request.params.id]);
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 // Get users published reviews for profile page
 app.get("/reco/UserReviews/:id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT reviews.id, reviews.game_id, reviews.user_id, reviews.rating, reviews.review_text, reviews.created, games.title FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE reviews.user_id = $1", [request.params.id]);
-    response.send(rows);
+    response.status(200).send(rows);
 }));
 app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "dist")));
 app.listen(3000, () => {

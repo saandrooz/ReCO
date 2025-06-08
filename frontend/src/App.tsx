@@ -16,7 +16,7 @@ import UserContext from "./components/UserContext";
 import DetectUser from "./components/DetectUser";
 
 function App() {
-  const [user, setUser] = useState<number | null>(null);
+  const [user, setUser] = useState<number | null | undefined>(null);
 
   const router = createHashRouter([
     {

@@ -33,35 +33,43 @@ const P = styled.p`
   flex-basis: 100%;
 `;
 
-const LABEL = styled.label`
-  padding-top: 10px;
-`
+const ERROR_DIV = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: hsla(274, 26%, 16%, 0.4);
+  border: #ff707f solid 1px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 0 25px 0 25px;
+`;
+
+const ERROR_P = styled.p`
+  color: #ff707f;
+`;
 // End of Styling/CSS
 
 function WriteReview() {
   const { user } = useContext(UserContext);
   const { id } = useParams();
-
   const [rating, setRating] = useState(0);
   const [text, setText] = useState("");
-
   const [isOK, setIsOK] = useState<string | null>("?");
-
   const nav = useNavigate();
 
   return (
     <>
       {!isOK ? (
-        <DIV>
-          <P>
-          Could not post review. Have you filled in both a rating and review text? You may have already submitted a review for this game — only one review per user is allowed per game.
-          </P>
-        </DIV>
+        <ERROR_DIV>
+          <ERROR_P>
+            Could not post review. Have you filled in both a rating and review
+            text? You may have already submitted a review for this game — only
+            one review per user is allowed per game.
+          </ERROR_P>
+        </ERROR_DIV>
       ) : isOK === "OK" ? (
         <DIV>
-          <P>
-          Your review was posted successfully! Thank you for your input.
-          </P>
+          <P>Your review was posted successfully! Thank you for your input.</P>
         </DIV>
       ) : (
         <div></div>
@@ -98,7 +106,7 @@ function WriteReview() {
                 .then(() => {
                   setRating(0);
                   setText("");
-                  nav("/Games/" + id)
+                  nav("/Games/" + id);
                 })
                 .catch((error) => {
                   console.error(error);
@@ -108,6 +116,7 @@ function WriteReview() {
             <h3>Please fill in the following:</h3>
             <div className="rating">
               <br />
+              <label>Rating:</label>
               <Rating
                 className="rating"
                 isRequired
@@ -116,10 +125,11 @@ function WriteReview() {
                 itemStyles={myStyles}
                 items={10}
               />
-              <LABEL>You rate this game {rating} / 10</LABEL>
+              <p>You rate this game {rating} / 10</p>
             </div>
-            <div className="input">
-              <label>Write review: </label>
+            <div>
+              <br />
+              <label>Write review:</label>
               <br />
               <textarea
                 onChange={(event) => {

@@ -30,6 +30,21 @@ const INPUT = styled.input`
   }
 `;
 
+const ERROR_DIV = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: hsla(274, 26%, 16%, 0.4);
+  border: #ff707f solid 1px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 25px 25px 0 25px;
+`;
+
+const ERROR_P = styled.p`
+  color: #ff707f;
+`;
+
 const DIV = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -39,6 +54,11 @@ const DIV = styled.div`
   border-radius: 15px;
   padding: 10px;
   margin: 25px 25px 0 25px;
+`;
+
+const P = styled.p`
+  color: #d19efa;
+  flex-basis: 100%;
 `;
 
 const DIV1 = styled.div`
@@ -51,11 +71,6 @@ const DIV1 = styled.div`
   padding: 10px;
   border: #d19efa solid 1px;
   border-radius: 10px;
-`;
-
-const P = styled.p`
-  color: #d19efa;
-  flex-basis: 100%;
 `;
 
 const ICON = styled.img`
@@ -120,7 +135,6 @@ const LINK = styled(Link)`
   color: #2a1e33;
   text-decoration: none;
 `;
-
 // End of Styling/CSS
 
 interface Game {
@@ -172,11 +186,14 @@ function Search() {
           ></INPUT>
           <ICON alt="Search icon." src={search} />
         </DIV1>
+
         <div>
           {searchedGame.length === 0 && title.length > 0 ? (
-            <DIV>
-              <P>Could Not find any games matching your search input.</P>
-            </DIV>
+            <ERROR_DIV>
+              <ERROR_P>
+                Could not find any games matching your search input.
+              </ERROR_P>
+            </ERROR_DIV>
           ) : searchedGame.length > 0 ? (
             <div>
               <DIV>

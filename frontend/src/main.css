@@ -1,5 +1,4 @@
 /* Fonts -- START */
-
 @font-face {
   font-family: Pixel-Bold;
   src: url(assets/fonts/10Pixel-Bold.ttf);
@@ -24,14 +23,13 @@
   font-family: WDX;
   src: url(assets/fonts/WDXLLubrifontTC-Regular.ttf);
 }
-
 /* Fonts -- END */
 
 /* General CSS -- START */
 body {
   background-color: #503661;
   color: #f5f5f5;
-  font-family: Roboto; 
+  font-family: Roboto;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -57,8 +55,22 @@ h3 {
 }
 
 textarea {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   color: #2a1e33;
+  resize: none;
+  border-radius: 5px;
+  border: solid 2px #d19efa;
+}
+
+textarea:focus {
+  outline: none;
+  border: solid 2px #d19efa;
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 2px;
 }
 
 strong {
@@ -107,7 +119,6 @@ button > a {
     transform: rotate(-3deg);
   }
 }
-
 /* Button CSS -- END */
 
 /* Div CSS -- START */
@@ -135,43 +146,103 @@ button > a {
 }
 /* Div CSS -- END */
 
-
 /* Log In and Register CSS -- START */
-
 .input {
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .input > input {
-  width: 300px;
-  background-color: #F5F5F5;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
   color: #2a1e33;
+  border-radius: 5px;
+  border: solid 2px #d19efa;
 }
 
+.input > input:focus {
+  outline: none;
+  border: solid 2px #d19efa;
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.password {
+  margin-top: 20px;
+  position: relative;
+}
+
+.password > input {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  color: #2a1e33;
+  border-radius: 5px;
+  border: solid 2px #d19efa;
+}
+
+.password > input:focus {
+  outline: none;
+  border: solid 2px #d19efa;
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.password_icon {
+  position: absolute;
+  z-index: 2;
+  right: 15px;
+  top: 17px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
 /* Log In and Register CSS -- END */
 
 /* Rating CSS -- START */
-
 .rating {
   display: flex;
-  flex-direction: column; 
-  align-items: center;    
-  margin-top: 10px; 
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
   max-width: 200px;
-  margin: auto; 
+  margin: auto;
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .rating:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-
 /* Rating CSS -- END */
 
-
 /* Responsive CSS -- START */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 420px) {
+  /* Responsive Log In and Register CSS -- START */
+  .password_icon {
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    top: 17px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  /* Responsive Log In and Register CSS -- END */
+}
 
+@media screen and (min-width: 500px) {
+  /* Responsive Log In and Register CSS -- START */
+  .password_icon {
+    position: absolute;
+    z-index: 2;
+    right: 25px;
+    top: 17px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  /* Responsive Log In and Register CSS -- END */
+}
+
+@media screen and (min-width: 600px) {
   /* General Responsive CSS -- START */
   h1 {
     padding: 10px;
@@ -179,42 +250,52 @@ button > a {
     font-family: Pixel-Bold;
     font-size: 40px;
   }
-  
+
   h2 {
     padding-top: 25px;
     font-family: Pixel-Bold;
     font-size: 35px;
   }
-   /* General Responsive CSS -- END */
+  /* General Responsive CSS -- END */
+
+  /* Responsive Log In and Register CSS -- START */
+  .password_icon {
+    position: absolute;
+    z-index: 2;
+    right: 30px;
+    top: 17px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  /* Responsive Log In and Register CSS -- END */
 
   /* Responsive Rating CSS -- START */
   .rating {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    margin-top: 10px; 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
     max-width: 300px;
-    margin: auto; 
+    margin: auto;
     filter: drop-shadow(0 0 2em #646cffaa);
   }
   /* Responsive Rating CSS -- END */
- }
+}
 
-
- @media screen and (min-width: 700px) {
-    /* Responsive Div CSS -- START */
-    .container {
-      background-color: #2a1e33;
-      border-radius: 0.5em;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-      min-width: 600px;
-      max-width: 600px;
-      margin: 20px;
-      padding: 0 15px 25px 15px;
-      margin-bottom: 50px;
-    }
-     /* Responsive Div CSS -- END */
- }
-
- 
+@media screen and (min-width: 700px) {
+  /* Responsive Div CSS -- START */
+  .container {
+    background-color: #2a1e33;
+    border-radius: 0.5em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 10px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 600px;
+    max-width: 600px;
+    margin: 20px;
+    padding: 0 15px 25px 15px;
+    margin-bottom: 50px;
+  }
+  /* Responsive Div CSS -- END */
+}
 /* Responsive CSS -- END */

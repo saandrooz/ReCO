@@ -21,9 +21,8 @@ client.connect();
 app.get("/reco/Games", async (_request: Request, response: Response) => {
   const { rows } = await client.query("SELECT * FROM games");
 
-  response.send(rows);
+  response.status(200).send(rows);
 });
-
 
 // Get specific game details
 app.get("/reco/Games/:id", async (request: Request, response: Response) => {
@@ -31,7 +30,7 @@ app.get("/reco/Games/:id", async (request: Request, response: Response) => {
     request.params.id,
   ]);
 
-  response.send(rows);
+  response.status(200).send(rows);
 });
 
 // Get game genres
@@ -43,7 +42,7 @@ app.get("/reco/Genres/:id", async (request: Request, response: Response) => {
     [gameID]
   );
 
-  response.send(rows);
+  response.status(200).send(rows);
 });
 
 // Get reviews for a specific game and get username of published review
@@ -55,7 +54,7 @@ app.get("/reco/Reviews/:id", async (request: Request, response: Response) => {
     [gameID]
   );
 
-  response.send(rows);
+  response.status(200).send(rows);
 });
 
 // Post new review for a game
@@ -72,7 +71,7 @@ app.post(
       [gameID, userID, rating, text]
     );
 
-    response.send(rows);
+    response.status(201).send(rows);
   }
 );
 
@@ -87,10 +86,10 @@ app.post("/reco/Register", async (request: Request, response: Response) => {
     [username, email, password]
   );
 
-  response.send(rows);
+  response.status(201).send(rows);
 });
 
-// Log in user/page
+// Log in user
 app.post("/reco/", async (request: Request, response: Response) => {
   const email = request.body.email;
   const password = request.body.password;
@@ -101,7 +100,7 @@ app.post("/reco/", async (request: Request, response: Response) => {
   );
 
   if (rows && rows.length > 0) {
-    response.send(rows[0]);
+    response.status(200).send(rows[0]);
   } else {
     response.status(401).send(null);
   }
@@ -114,18 +113,19 @@ app.get("/reco/Profile/:id", async (request: Request, response: Response) => {
     [request.params.id]
   );
 
-  response.send(rows);
+  response.status(200).send(rows);
 });
 
 // Get users published reviews for profile page
-app.get("/reco/UserReviews/:id",
+app.get(
+  "/reco/UserReviews/:id",
   async (request: Request, response: Response) => {
     const { rows } = await client.query(
       "SELECT reviews.id, reviews.game_id, reviews.user_id, reviews.rating, reviews.review_text, reviews.created, games.title FROM reviews INNER JOIN games ON reviews.game_id = games.id WHERE reviews.user_id = $1",
       [request.params.id]
     );
 
-    response.send(rows);
+    response.status(200).send(rows);
   }
 );
 

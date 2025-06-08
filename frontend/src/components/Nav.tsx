@@ -28,15 +28,15 @@ const IMG = styled.img`
     animation: icon-animation 0.6s ease-in-out alternate infinite;
     transform-origin: center;
   }
-  
+
   @keyframes icon-animation {
-  from {
-    opacity: 1;
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.25;
+    }
   }
-  to {
-    opacity: 0.25;
-  } 
-}
 `;
 
 const LINK = styled(NavLink)`
@@ -45,8 +45,8 @@ const LINK = styled(NavLink)`
   padding: 5px 40px;
   font-size: large;
 
-  &.active img{
-    border-bottom: 2px solid #d19efa; 
+  &.active img {
+    border-bottom: 2px solid #d19efa;
   }
 `;
 // End of Styling/CSS
