@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 // Imports Images
-import happy from "../assets/icons/happy.png";
-import hide from "../assets/icons/hide.png";
-import show from "../assets/icons/show.png";
+import happy from '../assets/icons/happy.png';
+import hide from '../assets/icons/hide.png';
+import show from '../assets/icons/show.png';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const DIV = styled.div`
   display: flex;
@@ -51,7 +51,9 @@ const ERROR_LINK = styled(Link)`
 const DIV1 = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   min-width: 80%;
   max-width: 80%;
   padding: 0 15px 0 15px;
@@ -72,19 +74,19 @@ const IMG = styled.img`
 // End of Styling/CSS
 
 function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isOK, setIsOK] = useState<string | null>("?");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isOK, setIsOK] = useState<string | null>('?');
 
   /* Show/Hide password */
-  const [type, setType] = useState("password");
+  const [type, setType] = useState('password');
   const [visible, setVisible] = useState(false);
   const [showPasswordImg, setShowPasswordImg] = useState(show);
 
   function togglePassword() {
     setVisible(!visible);
-    setType(visible ? "password" : "text");
+    setType(visible ? 'password' : 'text');
     setShowPasswordImg(visible ? show : hide);
   }
 
@@ -106,17 +108,17 @@ function Register() {
           <ERROR_DIV>
             <ERROR_P>
               Could not create account. Please ensure all fields are filled out
-              correctly. Both your <strong>username</strong> and{" "}
+              correctly. Both your <strong>username</strong> and{' '}
               <strong>email</strong> must be unique and not already registered
-              on our website. Already have an account? Log in{" "}
-              <ERROR_LINK to={"/"}>here</ERROR_LINK>.
+              on our website. Already have an account? Log in{' '}
+              <ERROR_LINK to={'/'}>here</ERROR_LINK>.
             </ERROR_P>
           </ERROR_DIV>
-        ) : isOK === "OK" ? (
+        ) : isOK === 'OK' ? (
           <DIV>
             <P>
-              Your account has been created successfully! You can now log in{" "}
-              <LINK to={"/"}>here</LINK>.
+              Your account has been created successfully! You can now log in{' '}
+              <LINK to={'/'}>here</LINK>.
             </P>
           </DIV>
         ) : (
@@ -129,30 +131,30 @@ function Register() {
               onSubmit={(event) => {
                 event.preventDefault();
 
-                fetch("/reco/Register", {
+                fetch('/reco/Register', {
                   body: JSON.stringify({
                     username: username,
                     email: email,
                     password: password,
                   }),
                   headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                   },
-                  method: "POST",
+                  method: 'POST',
                 })
                   .then((response) => {
                     if (response.ok) {
                       const result = response.json();
-                      setIsOK("OK");
+                      setIsOK('OK');
                       return result;
                     } else {
                       setIsOK(null);
                     }
                   })
                   .then(() => {
-                    setUsername("");
-                    setEmail("");
-                    setPassword("");
+                    setUsername('');
+                    setEmail('');
+                    setPassword('');
                   })
                   .catch((error) => {
                     console.error(error);
@@ -212,7 +214,7 @@ function Register() {
 
         <div className="main_div">
           <button>
-            <Link to={"/"}>Click Here To Log In</Link>
+            <Link to={'/'}>Click Here To Log In</Link>
           </button>
         </div>
       </main>

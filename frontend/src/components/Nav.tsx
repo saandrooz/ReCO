@@ -1,12 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Imports Images/Icons
-import Game from "../assets/icons/games.png";
-import Home from "../assets/icons/home.png";
-import Profile from "../assets/icons/profile.png";
+import Game from '../assets/icons/games.png';
+import Home from '../assets/icons/home.png';
+import Profile from '../assets/icons/profile.png';
 
 const NAV = styled.div`
   background-color: #2a1e33;

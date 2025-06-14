@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { useContext } from "react";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { useContext } from 'react';
 
 // Imports Components
-import Nav from "../components/Nav";
-import Search from "../components/Search";
-import AverageRating from "../components/AverageRating";
-import UserContext from "../components/UserContext";
+import Nav from '../components/Nav';
+import Search from '../components/Search';
+import AverageRating from '../components/AverageRating';
+import UserContext from '../components/UserContext';
 
 // Imports Images
-import steam from "../assets/images/steam-logo.png";
+import steam from '../assets/images/steam-logo.png';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const IMG_DIV = styled.div`
   position: relative;
@@ -22,7 +22,9 @@ const IMG_DIV = styled.div`
 const DIV1 = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   min-width: 90%;
   max-width: 90%;
   margin: 25px;
@@ -33,14 +35,18 @@ const IMG = styled.img`
   width: 90%;
   height: auto;
   object-fit: cover;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 500px;
 `;
 
 const BOX = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 500px;
   margin: 20px;
   padding: 0 15px 25px 15px;
@@ -98,14 +104,14 @@ function Games() {
 
   useEffect(() => {
     if (!user) {
-      nav("/");
+      nav('/');
     }
   }, [user, nav]);
 
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch("/reco/Games")
+    fetch('/reco/Games')
       .then((response) => response.json())
       .then((data) => setGames(data));
   }, []);
@@ -142,7 +148,7 @@ function Games() {
                     </a>
                   </IMG_DIV>
                   <button>
-                    <Link to={"/Games/" + game.id}>More Info</Link>
+                    <Link to={'/Games/' + game.id}>More Info</Link>
                   </button>
                 </BOX>
               ))}

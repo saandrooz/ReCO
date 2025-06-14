@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import { useNavigate } from "react-router";
-import { useContext } from "react";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import { useNavigate } from 'react-router';
+import { useContext } from 'react';
 
 // Imports Components
-import Nav from "../components/Nav";
-import WriteReview from "../components/WriteReview";
-import AverageRating from "../components/AverageRating";
-import UserContext from "../components/UserContext";
+import Nav from '../components/Nav';
+import WriteReview from '../components/WriteReview';
+import AverageRating from '../components/AverageRating';
+import UserContext from '../components/UserContext';
 
 // Imports Images
-import steam from "../assets/images/steam-logo.png";
-import check from "../assets/images/check-steam.png";
+import steam from '../assets/images/steam-logo.png';
+import check from '../assets/images/check-steam.png';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const myStyles = {
   itemShapes: RoundedStar,
-  activeFillColor: "#D19EFA",
-  inactiveFillColor: "#F5F5F5",
+  activeFillColor: '#D19EFA',
+  inactiveFillColor: '#F5F5F5',
 };
 
 const VIDEO = styled.video`
@@ -75,7 +75,9 @@ const GENRE = styled.p`
 const BOX = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 600px;
   margin: 20px;
   padding: 0 15px 25px 15px;
@@ -134,7 +136,7 @@ function GameDetails() {
 
   useEffect(() => {
     if (!user) {
-      nav("/");
+      nav('/');
     }
   }, [user, nav]);
 
@@ -146,7 +148,7 @@ function GameDetails() {
 
   useEffect(() => {
     if (id) {
-      fetch("/reco/Games/" + id)
+      fetch('/reco/Games/' + id)
         .then((response) => response.json())
         .then((data) => setGameDetails(data));
     }
@@ -154,7 +156,7 @@ function GameDetails() {
 
   useEffect(() => {
     if (id) {
-      fetch("/reco/Genres/" + id)
+      fetch('/reco/Genres/' + id)
         .then((response) => response.json())
         .then((data) => setGameGenres(data));
     }
@@ -163,7 +165,7 @@ function GameDetails() {
   /* location.key ensure that reviews are fetched again every time the user navigates to a game page, even if the id hasn't changed. Without location.key, the useEffect might not trigger again because the id remains the same, and React assumes there's no need to re-run the effect. By including location.key in the dependency array, useEffect is forced to run every time the user navigates to the page even if the id is unchanged. It listens for navigation events, not just URL parameter changes. */
   useEffect(() => {
     if (id) {
-      fetch("/reco/Reviews/" + id)
+      fetch('/reco/Reviews/' + id)
         .then((response) => response.json())
         .then((data) => setGameReviews(data));
     }
@@ -192,7 +194,7 @@ function GameDetails() {
                   <div>
                     <p> {game.description} </p>
                     <p>
-                      {" "}
+                      {' '}
                       {game.title} is developed by {game.developer}.
                     </p>
                   </div>
@@ -243,7 +245,7 @@ function GameDetails() {
 
         <div className="main_div">
           <button>
-            <Link to={"/Games"}>Browse More Games</Link>
+            <Link to={'/Games'}>Browse More Games</Link>
           </button>
         </div>
       </main>

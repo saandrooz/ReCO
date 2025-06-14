@@ -60,6 +60,9 @@ textarea {
   resize: none;
   border-radius: 5px;
   border: solid 2px #d19efa;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 textarea:focus {
@@ -131,7 +134,9 @@ button > a {
 .container {
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   min-width: 80%;
   max-width: 80%;
   margin: 20px;
@@ -288,7 +293,8 @@ button > a {
   .container {
     background-color: #2a1e33;
     border-radius: 0.5em;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.2),
       0 10px 20px 0 rgba(0, 0, 0, 0.19);
     min-width: 600px;
     max-width: 600px;

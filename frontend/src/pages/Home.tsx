@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
+import { useContext } from 'react';
 
 // Imports Images
-import star from "../assets/icons/star.png";
+import star from '../assets/icons/star.png';
 
 // Imports Components
-import Nav from "../components/Nav";
-import UserContext from "../components/UserContext";
+import Nav from '../components/Nav';
+import UserContext from '../components/UserContext';
 
 // Styling/CSS -- START
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const IMG = styled.img`
   width: 30px;
@@ -42,7 +42,7 @@ function Home() {
 
   useEffect(() => {
     if (!user) {
-      nav("/");
+      nav('/');
     }
   }, [user, nav]);
 
@@ -57,7 +57,7 @@ function Home() {
 
             <p>
               ReCO — our playful mix of "Co-Op" and "Recommendation" — is your
-              go-to website for discovering and reviewing the best{" "}
+              go-to website for discovering and reviewing the best{' '}
               <strong>Co-Op</strong> and <strong>Multiplayer</strong> games out
               there. Whether you're planning a chill evening with friends or an
               all-night gaming session, we've got you covered!
@@ -78,7 +78,7 @@ function Home() {
               <br />
               <LI>
                 <strong>Multiplayer games</strong> simply mean more than one
-                person can play. This includes both <em>cooperative</em> and{" "}
+                person can play. This includes both <em>cooperative</em> and{' '}
                 <em>competitive</em> gameplay — so whether you're teaming up or
                 facing off, there's something for everyone.
               </LI>

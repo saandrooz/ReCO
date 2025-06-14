@@ -1,5 +1,5 @@
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const HEADER = styled.div`
   background-color: #2a1e33;
@@ -24,15 +24,15 @@ const H1 = styled.h1`
     42%,
     44%,
     100% {
-      text-shadow: 
-      0 0 4px #fff, 
-      0 0 11px #d19efa, 
-      0 0 19px #d19efa,
-      0 0 40px #d19efa, 
-      0 0 80px #d19efa, 
-      0 0 90px #d19efa, 
-      0 0 100px #d19efa,
-      0 0 150px #d19efa;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 11px #d19efa,
+        0 0 19px #d19efa,
+        0 0 40px #d19efa,
+        0 0 80px #d19efa,
+        0 0 90px #d19efa,
+        0 0 100px #d19efa,
+        0 0 150px #d19efa;
     }
     1%,
     4%,

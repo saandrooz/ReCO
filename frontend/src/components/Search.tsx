@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // Imports Images
-import search from "../assets/icons/search.png";
+import search from '../assets/icons/search.png';
 
 // Imports Components
-import AverageRating from "../components/AverageRating";
+import AverageRating from '../components/AverageRating';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const INPUT = styled.input`
   width: 80%;
@@ -85,7 +85,9 @@ const ICON = styled.img`
 const IMG = styled.img`
   width: 80%;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 500px;
 `;
 
@@ -96,7 +98,9 @@ const IMG_DIV = styled.div`
 const BOX = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   max-width: 300px;
   padding: 0 5px 25px 5px;
   margin: 25px 20px;
@@ -148,12 +152,12 @@ interface Game {
 }
 
 function Search() {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [searchedGame, setSearchedGame] = useState<Game[]>([]);
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch("/reco/Games")
+    fetch('/reco/Games')
       .then((response) => response.json())
       .then((data) => setGames(data));
   }, []);
@@ -174,7 +178,7 @@ function Search() {
           <INPUT
             onChange={(event) => {
               setTitle(event.target.value);
-              if (event.target.value !== "") {
+              if (event.target.value !== '') {
                 handleSearch(event.target.value);
               } else {
                 setSearchedGame([]);
@@ -206,7 +210,7 @@ function Search() {
                       <IMG alt="Image from the game." src={game.image} />
                     </IMG_DIV>
                     <BTN>
-                      <LINK to={"/Games/" + game.id}>Show More</LINK>
+                      <LINK to={'/Games/' + game.id}>Show More</LINK>
                     </BTN>
                   </BOX>
                 ))}

@@ -1,5 +1,5 @@
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const DIV = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ function Footer() {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }
 

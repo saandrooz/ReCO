@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { useContext } from "react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { useContext } from 'react';
 
 // Imports Images
-import happy from "../assets/icons/happy.png";
-import hide from "../assets/icons/hide.png";
-import show from "../assets/icons/show.png";
+import happy from '../assets/icons/happy.png';
+import hide from '../assets/icons/hide.png';
+import show from '../assets/icons/show.png';
 
 // Imports Components
-import Context from "../components/UserContext";
+import Context from '../components/UserContext';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ERROR_DIV = styled.div`
   display: flex;
@@ -36,7 +36,9 @@ const ERROR_LINK = styled(Link)`
 const DIV1 = styled.div`
   background-color: #2a1e33;
   border-radius: 0.5em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
   min-width: 80%;
   max-width: 80%;
   padding: 0 15px 0 15px;
@@ -59,20 +61,20 @@ const IMG = styled.img`
 function LogIn() {
   const { setUser } = useContext(Context);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isOK, setIsOK] = useState<string | null>("?");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isOK, setIsOK] = useState<string | null>('?');
 
   const nav = useNavigate();
 
   /* Show/Hide password */
-  const [type, setType] = useState("password");
+  const [type, setType] = useState('password');
   const [visible, setVisible] = useState(false);
   const [showPasswordImg, setShowPasswordImg] = useState(show);
 
   function togglePassword() {
     setVisible(!visible);
-    setType(visible ? "password" : "text");
+    setType(visible ? 'password' : 'text');
     setShowPasswordImg(visible ? show : hide);
   }
 
@@ -86,11 +88,11 @@ function LogIn() {
               ReCO is your hub for discovering and reviewing the best Co-Op and
               multiplayer games. Whether you're planning a relaxed evening with
               friends or an epic all-night gaming session, we've got you
-              covered!{" "}
+              covered!{' '}
             </p>
-            <p>We've got something for every squad.</p>{" "}
+            <p>We've got something for every squad.</p>{' '}
             <p>
-              {" "}
+              {' '}
               Share your experiences, rate your favorite games, and help others
               find their next multiplayer adventure.
             </p>
@@ -103,8 +105,8 @@ function LogIn() {
           <ERROR_DIV>
             <ERROR_P>
               User not found. Please make sure your email and password are
-              correct. Don't have an account? Create one{" "}
-              <ERROR_LINK to={"/Register"}>here</ERROR_LINK>.
+              correct. Don't have an account? Create one{' '}
+              <ERROR_LINK to={'/Register'}>here</ERROR_LINK>.
             </ERROR_P>
           </ERROR_DIV>
         ) : (
@@ -117,20 +119,20 @@ function LogIn() {
               onSubmit={(event) => {
                 event.preventDefault();
 
-                fetch("/reco/", {
+                fetch('/reco/', {
                   body: JSON.stringify({
                     email: email,
                     password: password,
                   }),
                   headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                   },
-                  method: "POST",
+                  method: 'POST',
                 })
                   .then((response) => {
                     if (response.ok) {
                       const result = response.json();
-                      setIsOK("OK");
+                      setIsOK('OK');
                       return result;
                     } else {
                       setIsOK(null);
@@ -138,9 +140,9 @@ function LogIn() {
                   })
                   .then((result) => {
                     setUser(result.id);
-                    setEmail("");
-                    setPassword("");
-                    nav("/Home");
+                    setEmail('');
+                    setPassword('');
+                    nav('/Home');
                   })
                   .catch((error) => {
                     console.error(error);
@@ -190,7 +192,7 @@ function LogIn() {
           <div>
             <h3>Don't have an account?</h3>
             <button>
-              <Link to={"/Register"}>Create An Account</Link>
+              <Link to={'/Register'}>Create An Account</Link>
             </button>
           </div>
         </div>

@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const myStyles = {
   itemShapes: RoundedStar,
-  activeFillColor: "#D19EFA",
-  inactiveFillColor: "#F5F5F5",
+  activeFillColor: '#D19EFA',
+  inactiveFillColor: '#F5F5F5',
 };
 
 const P = styled.p`
@@ -41,7 +41,7 @@ function AverageRating(props: IdProps) {
   const [gameReviews, setGameReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    fetch("/reco/Reviews/" + props.id)
+    fetch('/reco/Reviews/' + props.id)
       .then((response) => response.json())
       .then((data) => setGameReviews(data));
   }, [location.key, props.id]);
@@ -69,7 +69,7 @@ function AverageRating(props: IdProps) {
             readOnly
           />
           <P>
-            (An average rating of {calcAverageRating()}/10 based on{" "}
+            (An average rating of {calcAverageRating()}/10 based on{' '}
             {gameReviews.length} reviews)
           </P>
         </div>

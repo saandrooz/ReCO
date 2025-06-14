@@ -1,20 +1,20 @@
-import { useContext } from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
+import { useContext } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
 
 // Imports Components
-import UserContext from "../components/UserContext";
+import UserContext from '../components/UserContext';
 
 // Styling/CSS
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const myStyles = {
   itemShapes: RoundedStar,
-  activeFillColor: "#D19EFA",
-  inactiveFillColor: "#F5F5F5",
+  activeFillColor: '#D19EFA',
+  inactiveFillColor: '#F5F5F5',
 };
 
 const DIV = styled.div`
@@ -53,8 +53,8 @@ function WriteReview() {
   const { user } = useContext(UserContext);
   const { id } = useParams();
   const [rating, setRating] = useState(0);
-  const [text, setText] = useState("");
-  const [isOK, setIsOK] = useState<string | null>("?");
+  const [text, setText] = useState('');
+  const [isOK, setIsOK] = useState<string | null>('?');
   const nav = useNavigate();
 
   return (
@@ -67,7 +67,7 @@ function WriteReview() {
             one review per user is allowed per game.
           </ERROR_P>
         </ERROR_DIV>
-      ) : isOK === "OK" ? (
+      ) : isOK === 'OK' ? (
         <DIV>
           <P>Your review was posted successfully! Thank you for your input.</P>
         </DIV>
@@ -82,7 +82,7 @@ function WriteReview() {
             onSubmit={(event) => {
               event.preventDefault();
 
-              fetch("/reco/NewReview/" + id, {
+              fetch('/reco/NewReview/' + id, {
                 body: JSON.stringify({
                   game_id: id,
                   user_id: user,
@@ -90,14 +90,14 @@ function WriteReview() {
                   review_text: text,
                 }),
                 headers: {
-                  "Content-Type": "application/json",
+                  'Content-Type': 'application/json',
                 },
-                method: "POST",
+                method: 'POST',
               })
                 .then((response) => {
                   if (response.ok) {
                     const result = response.json();
-                    setIsOK("OK");
+                    setIsOK('OK');
                     return result;
                   } else {
                     setIsOK(null);
@@ -105,8 +105,8 @@ function WriteReview() {
                 })
                 .then(() => {
                   setRating(0);
-                  setText("");
-                  nav("/Games/" + id);
+                  setText('');
+                  nav('/Games/' + id);
                 })
                 .catch((error) => {
                   console.error(error);

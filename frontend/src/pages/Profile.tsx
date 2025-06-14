@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
+import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
 
 // Styling/CSS
 const myStyles = {
   itemShapes: RoundedStar,
-  activeFillColor: "#D19EFA",
-  inactiveFillColor: "#F5F5F5",
+  activeFillColor: '#D19EFA',
+  inactiveFillColor: '#F5F5F5',
 };
 // End of Styling/CSS
 
 // Imports Components
-import Nav from "../components/Nav";
-import UserContext from "../components/UserContext";
+import Nav from '../components/Nav';
+import UserContext from '../components/UserContext';
 
 interface User {
   id: number;
@@ -41,7 +41,7 @@ function AccountDetails() {
 
   useEffect(() => {
     if (!user) {
-      nav("/");
+      nav('/');
     }
   }, [user, nav]);
 
@@ -50,7 +50,7 @@ function AccountDetails() {
 
   useEffect(() => {
     if (user) {
-      fetch("/reco/Profile/" + user)
+      fetch('/reco/Profile/' + user)
         .then((response) => response.json())
         .then((data) => setUserInfo(data));
     }
@@ -58,7 +58,7 @@ function AccountDetails() {
 
   useEffect(() => {
     if (user) {
-      fetch("/reco/UserReviews/" + user)
+      fetch('/reco/UserReviews/' + user)
         .then((response) => response.json())
         .then((data) => setUserReviews(data));
     }
@@ -66,7 +66,7 @@ function AccountDetails() {
 
   function logOutUser() {
     setUser(undefined);
-    nav("/");
+    nav('/');
   }
 
   return (
@@ -107,13 +107,13 @@ function AccountDetails() {
                       <p>You rated this game {review.rating}/10</p>
                       <p>{review.review_text}</p>
                       <button>
-                        <Link to={"/Games/" + review.game_id}>
+                        <Link to={'/Games/' + review.game_id}>
                           Go To Game Page
                         </Link>
                       </button>
                     </div>
                   </div>
-                ))}{" "}
+                ))}{' '}
               </div>
             ) : (
               <div className="main_div">
@@ -121,7 +121,7 @@ function AccountDetails() {
                   <h2>No Reviews Yet</h2>
                   <p>Start browsing our games and share your thoughts!</p>
                   <button>
-                    <Link to={"/Games"}>Browse Games</Link>
+                    <Link to={'/Games'}>Browse Games</Link>
                   </button>
                 </div>
               </div>
